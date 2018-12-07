@@ -9,6 +9,8 @@ This interactive exhibit has three components:
 
 During 2018 & 2019, the code will be adapted for an upcoming exhibition on life in the Arctic region at the Nordic Museum in Stockholm, Sweden.
 
+Image from Jamal is Copyright © Dmitry Arzyutov.
+
 <br/>
 
 # <a name="voting"></a>Voting Application
