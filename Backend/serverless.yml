@@ -91,33 +91,33 @@ functions:
       tableName: ${self:custom.dynamoDbEmailsTableName}
 
 
-resources:  
+resources:
   Resources:
-    ImagesS3Bucket:
-     Type: AWS::S3::Bucket
-     Properties:
-       BucketName: ${self:custom.emailImagesBucketName}
-       AccessControl: 'PublicRead'
-    ImagesS3BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket:
-          Ref: ImagesS3Bucket
-        PolicyDocument:
-          Statement:
-            - Sid: PublicReadGetObject
-              Effect: Allow
-              Principal: "*"
-              Action:
-              - s3:GetObject
-              Resource:
-                Fn::Join: [
-                  "", [
-                    "arn:aws:s3:::",
-                    { "Ref": "ImagesS3Bucket" },
-                    "/*"
-                  ]
-                ]
+    # ImagesS3Bucket:
+    #  Type: AWS::S3::Bucket
+    #  Properties:
+    #    BucketName: ${self:custom.emailImagesBucketName}
+    #    AccessControl: 'PublicRead'
+    # ImagesS3BucketPolicy:
+    #   Type: AWS::S3::BucketPolicy
+    #   Properties:
+    #     Bucket:
+    #       Ref: ImagesS3Bucket
+    #     PolicyDocument:
+    #       Statement:
+    #         - Sid: PublicReadGetObject
+    #           Effect: Allow
+    #           Principal: "*"
+    #           Action:
+    #           - s3:GetObject
+    #           Resource:
+    #             Fn::Join: [
+    #               "", [
+    #                 "arn:aws:s3:::",
+    #                 { "Ref": "ImagesS3Bucket" },
+    #                 "/*"
+    #               ]
+    #             ]
 
     DynamoDbPledgesTable:
       Type: AWS::DynamoDB::Table
