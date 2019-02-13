@@ -10,7 +10,7 @@
     <script src="data/confirmationSynonyms.js" charset="utf-8"></script>
     <script>
 
-      var {remote} = require('electron'); 
+      var {remote} = require('electron');
 
       //////////////////////// EVENT EMITTERS ////////////////////////
 
@@ -29,7 +29,7 @@
           computerLocation: "Right"
         });
         $.post({
-            url: 'https://yhwyy8uzf7.execute-api.us-east-1.amazonaws.com/production/pledge',
+            url: 'https://58u3ew20yd.execute-api.us-east-1.amazonaws.com/dev/pledge',
             headers: { 'x-api-key': secret },
             data: body,
         })
@@ -49,11 +49,13 @@
           email: email,
           subcategory: subcategory
         });
-
-        $.post({
-            url: 'https://yhwyy8uzf7.execute-api.us-east-1.amazonaws.com/production/reminder',
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: 'https://58u3ew20yd.execute-api.us-east-1.amazonaws.com/dev/reminder',
             headers: { 'x-api-key': secret },
-            data: body,
+            contentType: 'application/json',
+            data: body
         })
         .always(reminderDone);
       }
@@ -64,11 +66,11 @@
 
       var THANKS_TIMEOUT;
       var SYNONYM_INDEX;
-      var SESSION_CATEGORY; // transporation, water, habitat, food, energy
+      var SESSION_CATEGORY; // travels, clothing, purchases, food, living
       var SESSION_ACTION; // 0, 1, 2
 
       var idleTime = 0;
-  
+
 
 
       //////////////////////// FUNCTIONS ////////////////////////
@@ -83,18 +85,18 @@
 
 
         // Init click events
-        $(".category").bind('click', function() { 
+        $(".category").bind('click', function() {
           idleTime = 0;
-          startSession($(this).attr('id')); 
+          startSession($(this).attr('id'));
         });
-        $(".categoryLabel").bind('click', function() { 
+        $(".categoryLabel").bind('click', function() {
           idleTime = 0;
-          startSession(($(this).attr('id')).slice(0, -5)); 
+          startSession(($(this).attr('id')).slice(0, -5));
         });
 
-        $(".closeModalButton").bind('click', function() { 
+        $(".closeModalButton").bind('click', function() {
           idleTime = 0;
-          endSession(); 
+          endSession();
         });
 
         $('.actionItem').each(function(index, item) {
@@ -116,24 +118,24 @@
           });
         });
 
-        $("#submitActionButton").bind('click', function() { 
+        $("#submitActionButton").bind('click', function() {
           idleTime = 0;
           $("#checklistLogo").addClass('grow');
           $("#submitActionButton").addClass('hide');
-          pledge(SESSION_CATEGORY); 
+          pledge(SESSION_CATEGORY);
         });
 
-        $("#confirmationEmailQuestionNoButton").bind('click', function() { 
-          showModal('thanks'); 
+        $("#confirmationEmailQuestionNoButton").bind('click', function() {
+          showModal('thanks');
           idleTime = 0;
         });
 
-        $("#confirmationEmailQuestionYesButton").bind('click', function() { 
+        $("#confirmationEmailQuestionYesButton").bind('click', function() {
           idleTime = 0;
-          showModal('email'); 
+          showModal('email');
         });
 
-        $("#submitEmail").click(function() { 
+        $("#submitEmail").click(function() {
           idleTime = 0;
           var categoryObject = systems[SESSION_CATEGORY];
           var action = categoryObject.actions[SESSION_ACTION].id;
@@ -142,7 +144,7 @@
         });
       }
 
-    // Code for keyboard from Vasili 
+    // Code for keyboard from Vasili
     // @ https://code.tutsplus.com/tutorials/creating-a-keyboard-with-css-and-jquery--net-5774
     function initKeyboard() {
         $(function(){
@@ -150,12 +152,12 @@
           shift = false,
           capslock = false;
           $('.capslock').removeClass('highlighted');
-         
-          $('#keyboard li').click( function() {   
-            idleTime = 0;         
+
+          $('#keyboard li').click( function() {
+            idleTime = 0;
             var $this = $(this);
             var character = $this.html();
-             
+
             // Shift keys
             if ($this.hasClass('left-shift')) {
               $('.letter').addClass('uppercase');
@@ -166,7 +168,7 @@
               $this.addClass('highlighted');
               return false;
             }
-             
+
             // Caps lock
             if ($this.hasClass('capslock')) {
               $('.letter').toggleClass('uppercase');
@@ -179,7 +181,7 @@
               }
               return false;
             }
-             
+
             // Delete
             if ($this.hasClass('delete')) {
               var html = $write.html();
@@ -189,14 +191,14 @@
               }
               return false;
             }
-             
+
             // Special characters
             if ($this.hasClass('symbol')) character = $('span:visible', $this).html();
             if ($this.hasClass('space')) character = ' ';
-             
+
             // Uppercase letter
             if ($this.hasClass('uppercase')) character = character.toUpperCase();
-             
+
             // Remove shift once a key is clicked.
             if (shift === true) {
               $('.symbol span').toggle();
@@ -204,7 +206,7 @@
               shift = false;
               $('.left-shift').removeClass('highlighted');
             }
-             
+
             // Add the character
             $write.html($write.html() + character);
             if ($write.val().length > 0) {
@@ -246,13 +248,13 @@
         $("#checklistLogo").removeClass('grow');
 
         // Reset lure screen
-        $(".category").bind('click', function() { 
+        $(".category").bind('click', function() {
           idleTime = 0;
-          startSession(($(this).attr('id'))); 
+          startSession(($(this).attr('id')));
         });
-        $(".categoryLabel").bind('click', function() { 
+        $(".categoryLabel").bind('click', function() {
           idleTime = 0;
-          startSession(($(this).attr('id')).slice(0, -5)); 
+          startSession(($(this).attr('id')).slice(0, -5));
         });
         $(".categoryLabel").removeClass( "hide" );
         $("#caption").removeClass( "hide" );
@@ -276,7 +278,7 @@
       }
 
 
-      
+
       function showModal(modal) {
         var categoryObject = systems[SESSION_CATEGORY];
 
@@ -284,7 +286,7 @@
 
           case 'checklist':
             // Populate checklist html
-            $('#checklistPrompt').html('Jag vill ändra något som har med '+ categoryObject.name.toLowerCase() +' att göra:');
+            $('#checklistPrompt').html('To improve '+ categoryObject.name.toLowerCase() +', I will:');
             for (var i = 0; i < 3; i++) {
               $($(".actionItemName")[i]).html(categoryObject.actions[i].name);
               $($(".actionItemText")[i]).html(categoryObject.actions[i].text);
@@ -352,10 +354,10 @@
 
 
       function touchHandler(event) {
-        event.preventDefault(); 
-        event.stopPropagation();  
+        event.preventDefault();
+        event.stopPropagation();
         return false;
-      } 
+      }
 
       function timerIncrement(ms) {
         idleTime = idleTime + ms;
@@ -369,18 +371,18 @@
         init();
         initKeyboard();
 
-        $('html').css({ /*
+        $('html').css({
           '-webkit-transform': 'rotate(180deg)',
           ' -moz-transform': 'rotate(180deg)',
           'width': '100%',
           'height': '100%',
-          'top': '1000px' */
+          'top': '1000px'
         });
 
         // debugging
         window.addEventListener('keydown', function(e) {
         if (e.keyCode === 68) remote.getCurrentWindow().toggleDevTools(); // D
-        else if (e.keyCode === 82) location.reload(); // R  
+        else if (e.keyCode === 82) location.reload(); // R
          });
         // touch events - disable zoom
         window.addEventListener('ontouchstart', touchHandler, false);
@@ -406,7 +408,7 @@
       /* General Style */
 
       * {
-        /* cursor: url(cursor.cur), auto; */
+        cursor: url(cursor.cur), auto;
       }
 
       body {
@@ -436,33 +438,33 @@
       .title {
         font-size: 50px;
         line-height: 52px;
-        color: #222; /* white */
+        color: #e9efe7; /* white */
         font-family: 'BrandonTitle';
       }
 
       .subtitle {
-        font-size: 40px !important; 
+        font-size: 40px !important;
         color: #e9efe7 !important; /* white */
         font-family: 'BrandonBody' !important;
       }
 
       .instruction {
         font-family: 'BrandonBody';
-        color: #222; /* light green */
+        color: #bdcc9b; /* light green */
         font-size: 30px;
         line-height: 1.2;
       }
 
       .body {
         font-family: 'BrandonBody';
-        color: #222; /* light gray */
+        color: #bec4ba; /* light gray */
         font-size: 30px;
         line-height: 1.2;
       }
 
       .bodyBold {
         font-family: 'BrandonTitle' !important;
-        color: #202; /* light green */
+        color: #bdcc9b; /* light green */
       }
 
       .shadow {
@@ -471,14 +473,14 @@
 
       .clickable {
         background-color: #2d606f; /* base middle blue */
-        color:  #022; /* white */
+        color:  #e9efe7; /* white */
         text-align: center;
         font-size: 28px;
         font-family: 'BrandonTitle';
       }
 
       .clickable:active, .clickable:hover {
-        background-color: #666; /* highlight blue */
+        background-color: #72b5b1; /* highlight blue */
         box-shadow: 0px 0px 0px rgba(55, 55, 53, 0.5);
       }
 
@@ -487,7 +489,7 @@
       }
 
       .modal {
-        background: url('images/Selfie.jpg');  /* base darkest blue */
+        background-color: rgba(4, 70, 78, 0.85);  /* base darkest blue */
         position: absolute;
         top: 50px;
         bottom: 75px;
@@ -517,7 +519,7 @@
         border-radius: 50px;
       }
 
-      #map, 
+      #map,
       #clickableOverlay {
         position: absolute;
         top: 0px;
@@ -533,42 +535,40 @@
       #caption {
         position: absolute;
         top: 8%;
-        left: 5%;
-        background-color: rgba(30, 30, 30, 0.6);
-        color: #eee;
+        right: 5%;
       }
 
       .categoryLabel {
         position: absolute;
-        padding: 40px;
+        padding: 15px 40px;
         text-align: center;
-        border-radius: 50%;
-        background-color: rgba(30, 30, 30, 0.6);  /* base darkest blue */
+        border-radius: 7px;
+        background-color: rgba(4, 70, 78, 0.85);  /* base darkest blue */
       }
 
-      #PrylarLabel {
-        top: 40%;
-        left: 17%;
+      #LivingLabel {
+        top: 19.5%;
+        left: 30%;
       }
 
-      #KläderLabel {
-        top: 54%;
-        left: 53%;
+      #TravelsLabel {
+        top: 55%;
+        left: 41%;
       }
 
-      #MatLabel {
-        top: 53%;
-        left: 88%;
+      #FoodLabel {
+        top: 30%;
+        left: 70%;
       }
 
-      #ResorLabel {
-        top: 61%;
-        left: 7%;
+      #PurchasesLabel {
+        top: 68%;
+        left: 73%;
       }
 
-      #BostäderLabel {
-        top: 37%;
-        left: 78%;
+      #ClothingLabel {
+        top: 65%;
+        left: 10%;
       }
 
 
@@ -669,7 +669,7 @@
       }
 
       #checklistLocalOrgText {
-        color: #222; /* hightlight yellow */
+        color: #d2d940; /* hightlight yellow */
         display: inline-block;
         width: 850px;
         vertical-align: top;
@@ -688,7 +688,7 @@
       }
 
 
-      /* Confirmation Modal Style */ 
+      /* Confirmation Modal Style */
 
       #confirmationContainer {
         width: 95%;
@@ -716,7 +716,7 @@
       }
 
       #confirmationAction {
-        color: #222; /* hightlight yellow */
+        color: #d2d940; /* hightlight yellow */
       }
 
       #confirmationEmailQuestionNoButton, #confirmationEmailQuestionYesButton {
@@ -731,7 +731,7 @@
 
 
       /* Email Modal Style */
-      
+
       #container {
         width: 1218px;
         margin: auto;
@@ -761,9 +761,9 @@
         border: none;
       }
 
-      #write:focus { 
+      #write:focus {
         outline: none;
-      } 
+      }
 
 
       #submitEmail {
@@ -811,9 +811,9 @@
         clear: left;
       }
 
-      #keyboard .email, 
-      #keyboard .delete, 
-      #keyboard .left-shift, 
+      #keyboard .email,
+      #keyboard .delete,
+      #keyboard .left-shift,
       #keyboard .capslock {
         width: auto;
         font-size: 32px;
@@ -873,7 +873,7 @@
         fill: rgba(4, 70, 78, 0.4);
         opacity: 1;
         will-change: opacity;
-      } 
+      }
 
 
 
@@ -891,11 +891,11 @@
   </div>
 
   <!-- Category Labels -->
-  <div class="categoryLabel shadow clickable subtitle" id="BostäderLabel">Bostäder</div>
-  <div class="categoryLabel shadow clickable subtitle" id="ResorLabel">Resor</div>
-  <div class="categoryLabel shadow clickable subtitle" id="MatLabel">Mat</div>
-  <div class="categoryLabel shadow clickable subtitle" id="KläderLabel">Kläder</div>
-  <div class="categoryLabel shadow clickable subtitle" id="PrylarLabel">Prylar</div>
+  <div class="categoryLabel shadow clickable subtitle" id="ClothingLabel">Kläder</div>
+  <div class="categoryLabel shadow clickable subtitle" id="PurchasesLabel">Prylar</div>
+  <div class="categoryLabel shadow clickable subtitle" id="FoodLabel">Mat</div>
+  <div class="categoryLabel shadow clickable subtitle" id="TravelsLabel">Resor</div>
+  <div class="categoryLabel shadow clickable subtitle" id="LivingLabel">Bostaden</div>
 
   <!-- Modals -->
   <div class="modal largeModal shadow hide" id="checklistModal">
@@ -903,11 +903,11 @@
       <img id="checklistLogo" class="shadow" src="images/habitat_icon.png" width="150" height="150" draggable="false" />
       <div id="checklistHeaderText">
         <div id="checklistPrompt" class="title">
-          To improve (system), I will:
+          Jag lovar att förbättra mitt förhållningssätt till:
         </div>
         <div id="checklistInstruction" class="instruction">
-          Select one individual action and click submit. <br>
-          The poll above will tally the systems our visitors are interested in improving.
+          Välj ett alternativ och klicka sedan på "spara".<br>
+          Rösträkningen ovan visar alla alternativ som våra besökare lovar att förbättra.
         </div>
       </div>
     </div>
@@ -941,7 +941,7 @@
           </div>
         </div>
       </div>
-      <div id="checklistSeparator"> 
+      <div id="checklistSeparator">
       </div>
       <div id="checklistLocalOrgText" class="body">
       </div>
@@ -950,16 +950,17 @@
       <img src="images/dismiss_icon.png" width="30" height="30" draggable="false" />
     </div>
     <div id="submitActionButton" class="hide clickable shadow">
-      SUBMIT
+      SPARA
     </div>
   </div>
 
   <div class="modal largeModal shadow hide" id="confirmationModal">
     <div id="confirmationContainer">
       <div id="confirmationTitle" class="title"></div>
-      <div id="confirmationSubtitle" class="title">You've pledged to <span id="confirmationAction"></span></div>
+      <div id="confirmationSubtitle" class="title">Du lovar att förbättre ditt förhållningssätt till <span id="confirmationAction"></span></div>
       <div id="confirmationEmailQuestion" class="subtitle">
-        While individual actions are important, working within larger organizations has an even stronger impact. <br><span id="emailPrompt">Would you like to receive an email with more information about ways to improve</span>
+        Enskilda handlingar är viktiga. Det finns mycket man kan göra för att förbättra sin inverkan på klimatet.<br>
+        <span id="emailPrompt">Vill du ha ett bekräftelsemail med ytterligare information om ditt val?</span>
       </div>
       <div id="confirmationEmailQuestionButtons">
         <div id="confirmationEmailQuestionNoButton" class="clickable shadow">
@@ -970,7 +971,8 @@
         </div>
       </div>
       <div id="confirmationEmailPrivacyStatement" class="body">
-        We only collect your email address in order to send you a follow up to this exhibit. <br>We won't use this to spam you.
+        Vi kommer bara att använda din epostadress till att skicka ett uppföljningsmail för den här utställningen. <br />
+        Vi kommer inte att använda den till att skicka spam.
       </div>
     </div>
     <div class="closeModalButton clickable shadow">
@@ -1048,16 +1050,16 @@
           <li class="invisibleKey" style="width: 268px"></li>
           <li class="space lastitem">&nbsp;</li>
       </ul>
-    </div> 
+    </div>
     <div class="closeModalButton clickable shadow">
       <img src="images/dismiss_icon.png" width="30" height="30" draggable="false" />
     </div>
-     <div id="submitEmail" class="hide clickable shadow">SUBMIT</div>
+     <div id="submitEmail" class="hide clickable shadow">SPARA</div>
   </div>
 
   <div class="modal smallModal shadow hide" id="thanksModal">
-    <div id="thanksText" class="title">Thanks!</div>
+    <div id="thanksText" class="title">Tack!</div>
   </div>
 
-</body>
+  </body>
 </html>
