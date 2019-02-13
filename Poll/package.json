@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
-    "electron-rebuild": "./node_modules/.bin/electron-rebuild"
+    "electron-rebuild": "./node_modules/.bin/electron-rebuild",
+    "electron": "./node_modules/.bin/electron ."
   },
   "dependencies": {
     "electron-prebuilt": "^0.37.2",
