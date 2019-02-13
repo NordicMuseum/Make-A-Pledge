@@ -1,5 +1,5 @@
 service:
-  name: we-are-nature-backend
+  name: nordiska-museet-backend
 
 
 plugins:
@@ -7,7 +7,7 @@ plugins:
 
 
 custom:
-  name: we-are-nature-future-action
+  name: nordiska-museet
   stage: ${opt:stage, self:provider.stage}
   awsIOTEndPoint: ${file(./serverless.env.yml):${self:custom.stage}.AWS_IOT_ENDPOINT}
   awsIOTTopic: ${self:custom.name}-iot-topic-${self:custom.stage}
@@ -15,7 +15,7 @@ custom:
   awsIOTAccessKey: ${file(./serverless.env.yml):${self:custom.stage}.AWS_IOT_ACCESS_KEY}
   mailgunAPIKey: ${file(./serverless.env.yml):${self:custom.stage}.MAILGUN_API_KEY}
   mailgunDomain: ${file(./serverless.env.yml):${self:custom.stage}.MAILGUN_DOMAIN}
-  emailImagesBucketName:  ${self:custom.name}-s3-${self:custom.stage}
+  emailImagesBucketName: ${self:custom.name}-s3-${self:custom.stage}
   dynamoDbPledgesTableName: ${self:custom.name}-db-pledges-${self:custom.stage}
   dynamoDbEmailsTableName: ${self:custom.name}-db-emails-${self:custom.stage}
 
@@ -65,12 +65,14 @@ functions:
 
   reminder:
     handler: src/reminder/handler.reminder
+    memorySize: 256
     events:
       - http:
           method: post
           path: reminder
           private: true
           cors: true
+          integration: LAMBDA
     environment:
       tableName: ${self:custom.dynamoDbEmailsTableName}
       mailgunAPIKey: ${self:custom.mailgunAPIKey}
