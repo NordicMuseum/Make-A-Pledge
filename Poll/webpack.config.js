@@ -1,5 +1,5 @@
-var webpack = require('webpack');
-const WebpackShellPlugin = require('webpack-shell-plugin');
+const webpack = require('webpack')
+const WebpackShellPlugin = require('webpack-shell-plugin')
 
 module.exports = {
   entry: {
@@ -28,20 +28,25 @@ module.exports = {
         }
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
-      { test: /\.less$/, loader: 'style-loader!css-loader!less-loader'},
       { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
       {
-        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/, 
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader?name=fonts/[name].[ext]'
       }
     ]
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(new RegExp("^(fs|ipc)$")),
-    new WebpackShellPlugin({onBuildStart:['echo "Webpack Start"'], onBuildEnd:['echo "Webpack End"']})
+    new webpack.IgnorePlugin(new RegExp('^(fs|ipc)$')),
+    new WebpackShellPlugin({ onBuildStart: ['echo "Webpack Start"'], onBuildEnd: ['echo "Webpack End"'] })
   ],
 
-  target: 'electron-renderer',
+  target: 'web'
+  // target: 'electron-renderer',
 }
