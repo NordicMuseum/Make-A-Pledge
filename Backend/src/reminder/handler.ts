@@ -20,40 +20,46 @@ const mailgun = Mailgun({
   domain: process.env.mailgunDomain,
 });
 
-export const reminder = async (event: IEventPayload, context, callback: ICallback) => {  
+export const reminder = async (event: IEventPayload, context, callback: ICallback) => {
   const subcategories = [
-    'Airquality',
-    'Beef',
+    // Clothing
+    'Vintageclothing',
+    'Quality',
+    'Mend',
+    // Travels
     'Bike',
-    'Birds',
+    'Publictransport',
+    'Airtravel',
+    // Purchases
+    'Secondhand',
+    'Repair',
+    'Durability',
+    // Living
     'Energyaudit',
+    'Water',
+    'Electronics',
+    // Food
+    'Vegetarian',
     'Foodwaste',
-    'Hike',
-    'Kayaking',
-    'Nativeplants',
-    'Parking',
-    'Plastics',
-    'Renewable',
-    'Reuse',
-    'Soil',
-    'Tree',
+    'Locallyproduced',
   ];
 
   let body;
   try {
-    body = JSON.parse(event.body);
+    // body = JSON.parse(event.body);
+    body = event.body;
   } catch (e) {
     console.log(e);
 
     callback(null, {
       statusCode: HTTPStatusCodes.BadRequest,
-      body: "JSON is not valid.",
+      body: 'JSON is not valid.',
     });
     return;
   }
 
   if (isObjectEmpty(body) ||
-    objectOnlyContainsKeys(body, ["email", "subcategory"]) === false) {
+    objectOnlyContainsKeys(body, ['email', 'subcategory']) === false) {
     const dataFormat = {
       email: 'email',
       subcategory: 'MinorPledgeCategory',
@@ -61,19 +67,19 @@ export const reminder = async (event: IEventPayload, context, callback: ICallbac
 
     callback(null, {
       statusCode: HTTPStatusCodes.BadRequest,
-      body: "Please send data in the format: " + JSON.stringify(dataFormat),
+      body: 'Please send data in the format: ' + JSON.stringify(dataFormat),
     });
     return;
   } else if (!subcategories.includes(body.subcategory)) {
     callback(null, {
       statusCode: HTTPStatusCodes.BadRequest,
-      body: "Please make sure the subcategory is correct.",
+      body: 'Please make sure the subcategory is correct.',
     });
     return;
   }
 
   try {
-    const signed_up_date = (new Date).toLocaleDateString('en-US', { timeZone: "America/New_York" });
+    const signed_up_date = (new Date).toLocaleDateString('en-US', { timeZone: 'Europe/Stockholm' });
 
     const emailItem = {
       signed_up_date,
@@ -90,31 +96,27 @@ export const reminder = async (event: IEventPayload, context, callback: ICallbac
     // Find more dynamic way to find the emails
     const functionName = context.functionName.split('-').pop();
     const html = readFileSync(`./src/${functionName}/emails/confirm${body.subcategory}.html`, 'utf8');
-  
-    const from = `We Are Nature <WeAreNaturePGH@${process.env.mailgunDomain}>`;
+
+    const from = `Nordiska Museet Löftesinsamling <NordiskaMuseet@${process.env.mailgunDomain}>`;
 
     const emailData = {
       from,
       to: body.email,
-      subject: "Hooray! Here’s your pledge information.",
+      subject: 'Hurra! Här kommer information om ditt löfte.',
       html,
     };
-  
-    mailgun.messages().send(emailData, function (e) {
-      if (e) {
-        console.log(e);
-      }
 
-      callback(null, {
-        statusCode: HTTPStatusCodes.OK,
-      });
+    const result = await mailgun.messages().send(emailData);
+
+    callback(null, {
+      statusCode: HTTPStatusCodes.OK,
     });
   } catch (e) {
     console.log(e);
 
     callback(null, {
       statusCode: HTTPStatusCodes.InternalServerError,
-      body: "Server Error. Check server error logs.",
+      body: 'Server Error. Check server error logs.',
     });
   }
 }

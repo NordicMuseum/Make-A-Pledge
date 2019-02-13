@@ -43,7 +43,7 @@ export const sendReminders = async (event: IEventPayload, context, callback: ICa
     }, {});
 
     const functionName = context.functionName.split('-').pop();
-    const from = `We Are Nature <WeAreNaturePGH@${process.env.mailgunDomain}>`;
+    const from = `Nordiska Museet Löftesinsamling <NordiskaMuseet@${process.env.mailgunDomain}>`;
 
     Object.keys(emailsChunkedBySubcategory).forEach(function(subcategory) {
       const chunk = emailsChunkedBySubcategory[subcategory];
@@ -58,24 +58,20 @@ export const sendReminders = async (event: IEventPayload, context, callback: ICa
       const emailData = {
         from,
         to: emails,
-        // "recipient-variables" is required for batch sending
-        "recipient-variables": uniqueEmailKeys,
-        subject: "Did you follow through with your pledge?",
+        // 'recipient-variables' is required for batch sending
+        'recipient-variables': uniqueEmailKeys,
+        subject: 'Höll du ditt löfte?',
         html,
       };
-  
-      mailgun.messages().send(emailData, function (e) {
-        if (e) { console.log(e); }
-        // Not a big deal if it fails to send...
-        // But still log it!
-      });
+
+      mailgun.messages().send(emailData);
     });
   } catch (e) {
     console.log(e);
 
     callback(null, {
       statusCode: HTTPStatusCodes.InternalServerError,
-      body: "Server Error. Check server error logs.",
+      body: 'Server Error. Check server error logs.',
     });
   }
 }

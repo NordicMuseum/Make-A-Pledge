@@ -13,7 +13,7 @@ const iotdataPublishPromise = (params): Promise<any> =>
 
 export const pledgePost = async (event: IEventPayload, context, callback: ICallback) => {
   const directions = ["Right", "Left"];
-  const categories = ['Transportation', 'Energy', 'Food', 'Water', 'Habitat'];
+  const categories = ['Clothing', 'Travels', 'Food', 'Purchases', 'Living'];
 
   let body;
   try {

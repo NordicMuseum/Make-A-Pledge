@@ -15,11 +15,11 @@ export const dynamoDBScanPromise = (params): Promise<any> =>
 
 export interface TotalPledges {
   type: 'TOTAL',
-  Transportation: number,
-  Energy: number,
+  Clothing: number,
+  Travels: number,
   Food: number,
-  Water: number,
-  Habitat: number,
+  Purchases: number,
+  Living: number,
 }
 
 export const getTotalPledges = async (tablename: string): Promise<TotalPledges | null> => {
@@ -39,11 +39,11 @@ export const getTotalPledges = async (tablename: string): Promise<TotalPledges |
     if (isObjectEmpty(getResults)) {
       pledges = {
         type: 'TOTAL',
-        Transportation: 0,
-        Energy: 0,
+        Clothing: 0,
+        Travels: 0,
         Food: 0,
-        Water: 0,
-        Habitat: 0,
+        Purchases: 0,
+        Living: 0,
       }
     } else {
       pledges = getResults.Item;
