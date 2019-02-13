@@ -7,20 +7,20 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^4.1.0",
+    "copy-webpack-plugin": "^4.6.0",
     "serverless-webpack": "^3.0.0",
     "ts-loader": "^2.3.1",
-    "typescript": "^2.4.2",
-    "webpack": "^3.3.0"
+    "typescript": "^2.9.2",
+    "webpack": "^3.12.0"
   },
   "author": "Ruben Niculcea",
   "license": "MIT",
   "dependencies": {
     "@types/aws-sdk": "^2.7.0",
-    "@types/node": "^8.0.31",
-    "mailgun-js": "^0.13.1",
-    "moment-timezone": "^0.5.13",
+    "@types/node": "^8.10.39",
+    "mailgun-js": "^0.22.0",
+    "moment-timezone": "^0.5.23",
     "promise-cb": "^0.1.4",
-    "uuid": "^3.1.0"
+    "uuid": "^3.3.2"
   }
 }
