@@ -4,7 +4,16 @@ import { TweenMax } from 'gsap'
 
 import './index.css'
 import secret from './secrets.js'
+import identity from './identity.js'
 import { lang, settings } from './utils.js'
+
+import AWSMqttClient from 'aws-mqtt'
+import 'aws-sdk/dist/aws-sdk'
+const AWS = window.AWS
+AWS.config.region = 'us-east-1'
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+  IdentityPoolId: identity
+})
 
 const React = require('react')
 const ReactDOM = require('react-dom')
@@ -47,23 +56,46 @@ class Entry extends React.Component {
           return category
         })
 
+        const client = new AWSMqttClient({
+          region: AWS.config.region,
+          credentials: AWS.config.credentials,
+          endpoint: iotProperties.endpoint,
+          clientId: 'nordiska-museet-poll-client'
+        })
+
+        client.on('connect', () => {
+          console.log('websocket connect')
+          client.subscribe(iotProperties.topic)
+        })
+        client.on('message', (topic, message) => {
+          const { category, computerLocation } = JSON.parse(message)
+          that.animateVote(computerLocation, category)
+        })
+        client.on('close', () => {
+          console.log('websocket close')
+        })
+        client.on('offline', () => {
+          console.log('offline')
+        })
+
         // Setup a websocket to listen to new votes
-        IoT.create(
-          iotProperties.topic,
-          iotProperties.endpoint,
-          iotProperties.region,
-          iotProperties.accessKey,
-          iotProperties.secretKey,
-          () => {
-            console.log('websocket connect')
-          },
-          (topic, message) => {
-            const { category, computerLocation } = JSON.parse(message)
-            that.animateVote(computerLocation, category)
-          },
-          () => {
-            console.log('websocket close')
-          })
+        // IoT.create(
+        //   iotProperties.topic,
+        //   iotProperties.endpoint,
+        //   iotProperties.region,
+        //   iotProperties.accessKey,
+        //   iotProperties.secretKey,
+        //   () => {
+        //     console.log('websocket connect')
+        //   },
+        //   (topic, message) => {
+        //     const { category, computerLocation } = JSON.parse(message)
+        //     that.animateVote(computerLocation, category)
+        //   },
+        //   (response) => {
+        //     console.log(response)
+        //     console.log('websocket close')
+        //   })
 
         return { data, total }
       }).catch(function (err) {
