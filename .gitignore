@@ -5,3 +5,4 @@
 /Poll/public/built
 /Poll/node_modules
 /Poll/javascripts/identity.js
+VotingApplication/secrets.js
