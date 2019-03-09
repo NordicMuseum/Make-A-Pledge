@@ -6,7 +6,7 @@
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="lib/jquery-3.2.1.min.js" charset="utf-8"></script>
     <script src="secrets.js" charset="utf-8"></script>
-    <script src="data/systems.js" charset="utf-8"></script>
+    <script src="data/categories.js" charset="utf-8"></script>
     <script src="data/confirmationSynonyms.js" charset="utf-8"></script>
     <script>
 
@@ -104,7 +104,7 @@
             idleTime = 0;
             SESSION_ACTION = index;
             // Populate html with this action
-            $("#checklistLocalOrgText").html(systems[SESSION_CATEGORY].actions[SESSION_ACTION].localOrgText);
+            $("#checklistLocalOrgText").html(categories[SESSION_CATEGORY].actions[SESSION_ACTION].localOrgText);
             var valign = ['top', 'initial', 'bottom'];
             $("#checklistLocalOrgText").css({
               'position': 'relative',
@@ -137,7 +137,7 @@
 
         $("#submitEmail").click(function() {
           idleTime = 0;
-          var categoryObject = systems[SESSION_CATEGORY];
+          var categoryObject = categories[SESSION_CATEGORY];
           var action = categoryObject.actions[SESSION_ACTION].id;
           reminder(action, $('#write').val());
           showModal('thanks');
@@ -280,18 +280,18 @@
 
 
       function showModal(modal) {
-        var categoryObject = systems[SESSION_CATEGORY];
+        var categoryObject = categories[SESSION_CATEGORY];
 
         switch (modal) {
 
           case 'checklist':
             // Populate checklist html
-            $('#checklistPrompt').html('To improve '+ categoryObject.name.toLowerCase() +', I will:');
+            $('#checklistPrompt').html(categoryObject.name.toUpperCase());
             for (var i = 0; i < 3; i++) {
               $($(".actionItemName")[i]).html(categoryObject.actions[i].name);
               $($(".actionItemText")[i]).html(categoryObject.actions[i].text);
             }
-            $("#checklistLogo").attr('src', 'images/'+systems[SESSION_CATEGORY].icon)
+            $("#checklistLogo").attr('src', 'images/'+categories[SESSION_CATEGORY].icon)
 
             // Show checklist modal
             $('#checklistModal').removeClass('hide');
@@ -906,8 +906,10 @@
           Jag lovar att förbättra mitt förhållningssätt till:
         </div>
         <div id="checklistInstruction" class="instruction">
-          Välj ett alternativ och klicka sedan på "spara".<br>
-          Rösträkningen ovan visar alla alternativ som våra besökare lovar att förbättra.
+          Välj ett av alternativen och tryck sedan på "spara".<br/>
+          Du väljer sedan om du vill bli påmind om vad du lovat att förändra.<br/>
+          <br/>
+          Rösträkningen ovan visar vad våra besökare lovat att förändra.
         </div>
       </div>
     </div>
