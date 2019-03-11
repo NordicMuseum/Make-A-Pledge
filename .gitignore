@@ -6,3 +6,4 @@
 /Poll/node_modules
 /Poll/javascripts/identity.js
 VotingApplication/secrets.js
+Poll/javascripts/secrets.js
