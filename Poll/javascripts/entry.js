@@ -408,4 +408,4 @@ class Vote extends React.Component {
   }
 }
 
-ReactDOM.render(<Entry />, document.getElementById('content'))
+ReactDOM.render(<Entry />, document.getElementById('piechart'))
