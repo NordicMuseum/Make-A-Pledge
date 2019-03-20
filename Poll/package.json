@@ -1,5 +1,5 @@
 {
-  "name": "poll2",
+  "name": "nordic-museum-poll-client",
   "version": "0.1.0",
   "main": "main.js",
   "devDependencies": {
