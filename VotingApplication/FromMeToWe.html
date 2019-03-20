@@ -29,7 +29,7 @@
           computerLocation: "Right"
         });
         $.post({
-            url: 'https://58u3ew20yd.execute-api.us-east-1.amazonaws.com/dev/pledge',
+            url: 'https://gpo3k0bkb1.execute-api.us-east-2.amazonaws.com/production/pledge',
             headers: { 'x-api-key': secret },
             data: body,
         })
@@ -52,7 +52,7 @@
         $.ajax({
             type: 'POST',
             dataType: 'json',
-            url: 'https://58u3ew20yd.execute-api.us-east-1.amazonaws.com/dev/reminder',
+            url: 'https://gpo3k0bkb1.execute-api.us-east-2.amazonaws.com/production/reminder',
             headers: { 'x-api-key': secret },
             contentType: 'application/json',
             data: body
