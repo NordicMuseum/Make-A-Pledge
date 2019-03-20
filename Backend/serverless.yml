@@ -1,5 +1,5 @@
 service:
-  name: nordiska-museet-backend
+  name: nordic-museum-backend
 
 
 plugins:
@@ -7,7 +7,7 @@ plugins:
 
 
 custom:
-  name: nordiska-museet
+  name: nordic-museum
   stage: ${opt:stage, self:provider.stage}
   awsIOTEndPoint: ${file(./serverless.env.yml):${self:custom.stage}.AWS_IOT_ENDPOINT}
   awsIOTTopic: ${self:custom.name}-iot-topic-${self:custom.stage}
@@ -22,7 +22,7 @@ custom:
 
 provider:
   name: aws
-  region: us-east-1
+  region: us-east-2
   runtime: nodejs8.10
   memorySize: 128
   apiKeys:

@@ -1,5 +1,5 @@
 {
-  "name": "nordiska-museet-backend",
+  "name": "nordic-museum-backend",
   "version": "1.0.0",
   "description": "Nordiska Museet Backend",
   "main": "handler.js",
