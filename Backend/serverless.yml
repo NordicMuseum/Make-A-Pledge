@@ -84,7 +84,6 @@ functions:
     events:
       # AWS Cron is based on the GMT timezone, so this is 8am EST:
       - schedule: cron(0 12 * * ? *)
-      #- schedule: cron(*/5 * * * *)
     environment:
       mailgunAPIKey: ${self:custom.mailgunAPIKey}
       mailgunDomain: ${self:custom.mailgunDomain}
