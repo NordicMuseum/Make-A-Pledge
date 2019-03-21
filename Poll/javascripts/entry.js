@@ -10,7 +10,7 @@ import { lang, settings } from './utils.js'
 import AWSMqttClient from 'aws-mqtt'
 import 'aws-sdk/dist/aws-sdk'
 const AWS = window.AWS
-AWS.config.region = 'us-east-1'
+AWS.config.region = 'us-east-2'
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
   IdentityPoolId: identity
 })
@@ -29,7 +29,7 @@ const data = [
 class Entry extends React.Component {
   GETInitialVotes () {
     const that = this
-    return fetch('https://58u3ew20yd.execute-api.us-east-1.amazonaws.com/dev/pledge', {
+    return fetch('https://gpo3k0bkb1.execute-api.us-east-2.amazonaws.com/production/pledge', {
       method: 'GET',
       headers: new Headers({
         'X-Api-Key': secret
@@ -60,7 +60,7 @@ class Entry extends React.Component {
           region: AWS.config.region,
           credentials: AWS.config.credentials,
           endpoint: iotProperties.endpoint,
-          clientId: 'nordiska-museet-poll-client'
+          clientId: 'nordic-museum-poll-client'
         })
 
         client.on('connect', () => {
