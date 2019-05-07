@@ -8,3 +8,5 @@
 VotingApplication/secrets.js
 Poll/javascripts/secrets.js
 Backend/serverless.env.yml
+VotingApplication/.DS_Store
+.DS_Store
