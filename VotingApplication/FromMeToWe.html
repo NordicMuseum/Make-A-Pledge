@@ -306,7 +306,7 @@
             }
             $('#confirmationAction').html(actionName);
             $('#confirmationTitle').html(confirmationSynonyms[SYNONYM_INDEX]);
-            $('#emailPrompt').html("Would you like to receive an email with more information about ways to improve " + SESSION_CATEGORY.toLowerCase() + "?");
+            $('#emailPrompt').html("Vill du att vi skickar ett  bekräftelsemail med ytterligare information om ditt löfte att göra en insats kopplad till " + categories[SESSION_CATEGORY].name.toLowerCase() + "?");
             SYNONYM_INDEX = (SYNONYM_INDEX + 1) % confirmationSynonyms.length;
 
             // Hide checklist and show confirmation
@@ -812,7 +812,6 @@
       }
 
       #keyboard .email,
-      #keyboard .delete,
       #keyboard .left-shift,
       #keyboard .capslock {
         width: auto;
@@ -906,7 +905,7 @@
           Jag lovar att förbättra mitt förhållningssätt till:
         </div>
         <div id="checklistInstruction" class="instruction">
-          Välj ett av alternativen och tryck sedan på "spara".<br/>
+          Välj ett av alternativen och tryck sedan på "lova!"<br/>
           Du väljer sedan om du vill bli påmind om vad du lovat att förändra.<br/>
           <br/>
           Rösträkningen ovan visar vad våra besökare lovat att förändra.
@@ -952,7 +951,7 @@
       <img src="images/dismiss_icon.png" width="30" height="30" draggable="false" />
     </div>
     <div id="submitActionButton" class="hide clickable shadow">
-      SPARA
+      LOVA!
     </div>
   </div>
 
@@ -962,19 +961,19 @@
       <div id="confirmationSubtitle" class="title">Du lovar att förbättre ditt förhållningssätt till <span id="confirmationAction"></span></div>
       <div id="confirmationEmailQuestion" class="subtitle">
         Enskilda handlingar är viktiga. Det finns mycket man kan göra för att förbättra sin inverkan på klimatet.<br>
-        <span id="emailPrompt">Vill du ha ett bekräftelsemail med ytterligare information om ditt val?</span>
+        <span id="emailPrompt">Vill du att vi skickar ett  bekräftelsemail med ytterligare information om ditt löfte?</span>
       </div>
       <div id="confirmationEmailQuestionButtons">
         <div id="confirmationEmailQuestionNoButton" class="clickable shadow">
-          NO
+          NEJ
         </div>
         <div id="confirmationEmailQuestionYesButton" class="clickable shadow">
-          YES
+          JA
         </div>
       </div>
       <div id="confirmationEmailPrivacyStatement" class="body">
-        Vi kommer bara att använda din epostadress till att skicka ett uppföljningsmail för den här utställningen. <br />
-        Vi kommer inte att använda den till att skicka spam.
+        Vi kommer bara att använda din epostadress till att skicka ett uppföljningsmail med ytterligare information om ditt löfte.<br />
+        Vi kommer inte att använda den till att skicka skräppost.
       </div>
     </div>
     <div class="closeModalButton clickable shadow">
@@ -993,8 +992,8 @@
           <li class="email">@yahoo.com</li>
           <li class="email">@hotmail.com</li>
           <li class="email">@outlook.com</li>
-          <li class="email">@inbox.com</li>
-          <li class="email lastitem">@mail.com</li>
+          <li class="symbol"><span class="off">@</span><span class="on">@</span></li>
+          <li class="email lastitem">.se</li>
           <li class="invisibleKey" style="width: 0px"></li>
           <li class="symbol firstitem"><span class="off">1</span><span class="on">!</span></li>
           <li class="symbol"><span class="off">2</span><span class="on">@</span></li>
@@ -1009,7 +1008,7 @@
           <li class="symbol"><span class="off">_</span><span class="on">~</span></li>
           <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
           <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
-          <li class="delete lastitem">delete</li>
+          <li class="delete lastitem">⌫</li>
           <li class="invisibleKey" style="width: 56px"></li>
           <li class="letter">q</li>
           <li class="letter">w</li>
@@ -1056,7 +1055,7 @@
     <div class="closeModalButton clickable shadow">
       <img src="images/dismiss_icon.png" width="30" height="30" draggable="false" />
     </div>
-     <div id="submitEmail" class="hide clickable shadow">SPARA</div>
+     <div id="submitEmail" class="hide clickable shadow">SKICKA!</div>
   </div>
 
   <div class="modal smallModal shadow hide" id="thanksModal">
