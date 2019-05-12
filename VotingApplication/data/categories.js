@@ -74,7 +74,7 @@ var categories = {
       {
         id: 'Secondhand',
         name: 'Köp second hand .',
-        text: 'Inred ditt hem klimatsmart! Behöver du möbler, leksaker till barnen eller något annat till barnen. Handla second hand. Gå på loppis, kolla på blocket eller gå på auktion. Du får ofta kvalitetsmöbler för lägre pris än nytillverkade av sämre kvalité.',
+        text: 'Inred ditt hem klimatsmart! Behöver du möbler, leksaker till barnen, handla second hand. Gå på loppis, kolla på blocket eller gå på auktion. Du får ofta kvalitetsmöbler för lägre pris än nytillverkade av sämre kvalité.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
         learnMoreText: 'Att inreda hållbart.',
@@ -92,7 +92,7 @@ var categories = {
       {
         id: 'Durability',
         name: 'Gör långsiktiga inköp.',
-        localOrgText: 'Behöver du verkligen köpa nytt, välj då något av högre kvalité som håller längre och som är tillverkat i miljövänliga material. Om du köper en soffa kan du exempelvis undersöka om klädseln är avtagbar och tvättbar, eller om ett bord vid behov går att slipa ner.',
+        localOrgText: 'Behöver du verkligen köpa nytt, välj då något av högre kvalité som håller längre och som är tillverkat i miljövänliga material. Om du köper en soffa kan du  undersöka om klädseln är avtagbar och tvättbar, eller om ett bord går att slipa ner.',
         localOrgLink: [],
         learnMoreText: 'Att inreda hållbart.',
         learnMoreLink: 'https://malin.elledecoration.se/att-inreda-hallbart'
@@ -100,7 +100,7 @@ var categories = {
     ]
   },
   'Living': {
-    name: 'Bostaden',
+    name: 'Boende',
     icon: 'energy_icon.png',
     actions: [
       {
@@ -139,7 +139,7 @@ var categories = {
       {
         id: 'Vegetarian',
         name: 'Ät mer vegetariskt.',
-        text: 'Om du låter bli att äta nötkött en gång i veckan under ett år undviker du 150 kilo växthusgasutsläpp. Du sparar även pengar på att byta ut köttet mot till exempel baljväxter en gång i veckan. På ett år sparar du minst 450 kronor per person i hushållet genom att göra pastasås med bönor istället för med köttfärs.',
+        text: 'Om du låter bli att äta nötkött en gång i veckan under ett år undviker du 150 kilo växthusgasutsläpp. Du sparar även pengar &ndash; på ett år sparar du minst 450 kronor per person i hushållet genom att göra pastasås med bönor istället för med köttfärs.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
         learnMoreText: 'Klimatsmart i hemmet',
@@ -147,8 +147,8 @@ var categories = {
       },
       {
         id: 'Foodwaste',
-        name: 'Släng inte maten och handla bara så mycket du äter upp.',
-        text: 'Varje svensk slänger 28 kilo ätbar mat i soporna och 26 liter dryck i slasken varje år. Med planerade matinköp och inköpslistor samt rätt förvarade livsmedel kan ditt hushåll spara 3 000–6 000 kr per år på att minska matsvinnet. Förvara maten i temperaturen som producenten anger. ”Bäst före-datum” är en rekommendation från tillverkaren och maten håller ofta att äta när datum gått ut. Laga en rätt på rester varje vecka. Rester kan bli en god wok eller ingredienser på en pizza.',
+        name: 'Handla så mycket som du äter upp.',
+        text: 'Varje svensk slänger 28 kilo ätbar mat i soporna varje år. Med planerade matinköp samt rätt förvarade livsmedel kan ditt hushåll spara 3 000–6 000 kr per år. Förvara maten i den temperatur som producenten anger. ”Bäst före-datum” är en rekommendation och maten håller ofta att äta när datum gått ut.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
         learnMoreText: 'Klimatsmart i hemmet',
@@ -157,7 +157,7 @@ var categories = {
       {
         id: 'Locallyproduced',
         name: 'Köp närproducerat och efter säsong.',
-        text: 'Fråga i din matbutik vad som är i säsong just nu. Det finns ofta många olika sorters grönsaker, rotfrukter och baljväxter som bara väntar på att bli upptäckta! Potatis har liksom morot, broccoli och vitkål mycket liten klimatpåverkan eftersom de kan odlas nära, är tåliga och kan lagras länge. Ris har högre klimatpåverkan då det odlas i vatten och växtdelarnas nedbrytning bildar metangas. Ris kräver även långa transporter och är dyrare än potatis. Ett alternativ till ris är matvete.',
+        text: 'Fråga vad som är i säsong just nu. Potatis har liksom morot, broccoli och vitkål mycket liten klimatpåverkan eftersom de kan odlas nära och kan lagras länge. Ris har högre klimatpåverkan då det odlas i vatten och växtdelarnas nedbrytning bildar metangas. Ett alternativ till ris är matvete.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
         learnMoreText: 'Klimatsmart i hemmet',
