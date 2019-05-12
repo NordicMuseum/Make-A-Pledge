@@ -108,7 +108,7 @@
             var valign = ['top', 'initial', 'bottom'];
             $("#checklistLocalOrgText").css({
               'position': 'relative',
-              'top' : 200*SESSION_ACTION,
+              'top' : 210*SESSION_ACTION,
             });
             // Highlight the correct checkbox
             $(".itemCheckboxImage").attr('src', 'images/unchecked_box.png');
@@ -436,8 +436,8 @@
       }
 
       .title {
-        font-size: 50px;
-        line-height: 52px;
+        font-size: 32px;
+        line-height: 1;
         color: #e9efe7; /* white */
         font-family: 'GillSansBold';
       }
@@ -458,7 +458,7 @@
       .body {
         font-family: 'GillSansLight';
         color: #bec4ba; /* light gray */
-        font-size: 30px;
+        font-size: 24px;
         line-height: 1.2;
       }
 
@@ -603,7 +603,7 @@
       }
 
       #checklistHeader {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
       }
 
       #checklistHeaderText {
@@ -622,7 +622,7 @@
       #checklistContainer {
         display: inline-block;
         width: 750px;
-        padding-top: 30px;
+        padding-top: 20px;
       }
 
       #checklistSeparator {
@@ -639,7 +639,7 @@
 
       .actionItem {
         display: block;
-        height: 200px;
+        height: 210px;
       }
 
       .actionItemCheckbox {
@@ -664,8 +664,8 @@
       }
 
       .actionItemName {
-        line-height: 50px;
-        padding-bottom: 20px;
+        line-height: 40px;
+        padding-bottom: 15px;
       }
 
       #checklistLocalOrgText {
@@ -894,7 +894,7 @@
   <div class="categoryLabel shadow clickable subtitle" id="PurchasesLabel">Prylar</div>
   <div class="categoryLabel shadow clickable subtitle" id="FoodLabel">Mat</div>
   <div class="categoryLabel shadow clickable subtitle" id="TravelsLabel">Resor</div>
-  <div class="categoryLabel shadow clickable subtitle" id="LivingLabel">Bostaden</div>
+  <div class="categoryLabel shadow clickable subtitle" id="LivingLabel">Boende</div>
 
   <!-- Modals -->
   <div class="modal largeModal shadow hide" id="checklistModal">
