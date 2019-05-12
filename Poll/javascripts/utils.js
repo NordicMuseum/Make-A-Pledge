@@ -1,12 +1,12 @@
 const lang = {
-  heading: 'Vi lovar att förbättra...',
+  heading: 'Vi lovar att förbättra…',
   pledges: 'Löften',
   categories: {
     Clothing: 'Kläder',
     Travels: 'Resor',
     Purchases: 'Prylar',
     Food: 'Mat',
-    Living: 'Bostaden'
+    Living: 'Boende'
   }
 }
 
