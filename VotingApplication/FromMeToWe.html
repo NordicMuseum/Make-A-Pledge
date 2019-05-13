@@ -104,9 +104,9 @@
             idleTime = 0;
             SESSION_ACTION = index;
             // Populate html with this action
-            $("#checklistLocalOrgText").html(categories[SESSION_CATEGORY].actions[SESSION_ACTION].localOrgText);
+            $("#checklistlearnMoreText").html(categories[SESSION_CATEGORY].actions[SESSION_ACTION].learnMoreText);
             var valign = ['top', 'initial', 'bottom'];
-            $("#checklistLocalOrgText").css({
+            $("#checklistlearnMoreText").css({
               'position': 'relative',
               'top' : 210*SESSION_ACTION,
             });
@@ -267,7 +267,7 @@
         }
 
         // Clear divs, html, applied style
-        $("#checklistLocalOrgText").html('');
+        $("#checklistlearnMoreText").html('');
         $(".itemCheckboxImage").attr('src', 'images/unchecked_box.png');
         $('#write').html('');
         $("#submitActionButton").addClass('hide');
@@ -668,13 +668,22 @@
         padding-bottom: 15px;
       }
 
-      #checklistLocalOrgText {
+      #checklistlearnMoreText {
         color: #d2d940; /* hightlight yellow */
         display: inline-block;
         width: 850px;
         vertical-align: top;
         padding-top: 30px;
         margin-left: 50px;
+      }
+
+      .learnMoreImage {
+        float: left;
+        padding-right: 20px;
+      }
+
+      .learnMoreText {
+        margin-top: 0px;
       }
 
       #submitActionButton {
@@ -944,7 +953,7 @@
       </div>
       <div id="checklistSeparator">
       </div>
-      <div id="checklistLocalOrgText" class="body">
+      <div id="checklistlearnMoreText" class="body">
       </div>
     </div>
     <div class="closeModalButton clickable shadow">

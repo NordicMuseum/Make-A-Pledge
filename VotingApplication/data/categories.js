@@ -6,11 +6,10 @@ var categories = {
       {
         id: 'Vintageclothing',
         name: 'Handla second hand.',
-        // altName: '',
         text: 'Klädindustrin och bomullsodling sliter hårt på miljön. Men handlar du second hand kan du spara upp till 97 procent av energin som går åt till att tillverka nya kläder. Det är dessutom roligt att gå på loppis där du kan hitta riktigt unika plagg till låga priser.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: 'Klimatsmarta handlar second hand',
+        learnMoreText: '<img src="images/objects/NM.0201803.jpg" width="211" height="190" class="learnMoreImage"/><p class="learnMoreText">Livtröja från Hälsingland, mitten av 1800-talet. Möjligen är bålen tagen från en äldre tröja som har skarvats i med annat ylletyg på axlarna. NM.0201803</p>',
         learnMoreLink: 'http://www.tidningenhalsa.se/artiklar/kategori/20120420/klimatsmarta-handlar-second-hand/'
       },
       {
@@ -19,7 +18,7 @@ var categories = {
         text: 'Fundera ordentligt varje gång du köper nya kläder. Om du verkligen behöver köpa nya kläder, köp då färre plagg i bättre kvalité som håller länge.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: 'Skapa en klimatsmart garderob',
+        learnMoreText: '<img src="images/objects/NM.0273621A-B.jpg" width="211" height="190" class="learnMoreImage"/><p class="learnMoreText">Vinternäbbskor från Lappland, tidigt 1900-tal. NM.0273621A-B</p>',
         learnMoreLink: 'https://extra.orebro.se/klimatsmartvardag/klimatsmartatips/ekonomiochkonsumtion/skapaenhallbargarderob.4.6ad5e21514fe44c621c5044.html'
       },
       {
@@ -28,7 +27,7 @@ var categories = {
         text: 'Om ett plagg går sönder. Reparera det då. Ett hål på byxorna kan lappas, grenen kan förstärkas och skjortkragen vändas eller bytas ut. Kan du redan sy, så sätt igång. Annars kan du gå en kurs eller lämna in plagget för lagning. Ett lappat plagg blir unikt och ofta mycket vackert.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: 'Bli klimatsmart. Så vårdar du dina kläder',
+        learnMoreText: '<img src="images/objects/NM.0240612.jpg" width="141" height="190" class="learnMoreImage"/><p class="learnMoreText">Lappade timmerhuggarbyxor från Töre i Norrbotten, tidigt 1900-tal. NM.0240612</p>',
         learnMoreLink: 'https://karlavagen31.se/bli-klimatsmart-sa-vardar-du-dina-klader'
 
       }
@@ -41,7 +40,7 @@ var categories = {
       {
         id: 'Bike',
         name: 'Testa att cykla.',
-        text: 'Försök undvika bilen när du tar dig till och från jobbet. Ta cykeln istället. Det är miljövänligt och du får motion.',
+        text: 'När det är möjligt, ta cykeln eller promenera istället för att ta bilen. Det förbättrar din hälsa och gör att du sparar pengar samtidigt som du hjälper klimatet.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
         learnMoreText: 'Res klimatsmart',
@@ -59,7 +58,7 @@ var categories = {
       {
         id: 'Airtravel',
         name: 'Semestra klimatsmart.',
-        text: 'Långa flygresor är extremt klimatpåverkande. Försök därför semestra på närmare håll och ta tåget när det är möjligt. Låt de långa resorna med flyg vara något riktigt speciellt som du inte gör varje år. Semestra i Sverige eller Europa i år. Ni kan exempelvis fjällvandra, åka tåg till en spännande stad eller båtluffa i skärgården.',
+        text: 'När du ska åka längre eller åka på semester, åk då tåg istället för bil eller flyg. Tåget är bekvämt och är många gånger en upplevelse i sig. Resan blir en del av målet. Dessutom slipper du stressiga flygplatser, incheckning av bagage och säkerhetskontroller.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
         learnMoreText: 'Res klimatsmart',
@@ -73,7 +72,7 @@ var categories = {
     actions: [
       {
         id: 'Secondhand',
-        name: 'Köp second hand .',
+        name: 'Köp second hand.',
         text: 'Inred ditt hem klimatsmart! Behöver du möbler, leksaker till barnen, handla second hand. Gå på loppis, kolla på blocket eller gå på auktion. Du får ofta kvalitetsmöbler för lägre pris än nytillverkade av sämre kvalité.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
@@ -92,9 +91,9 @@ var categories = {
       {
         id: 'Durability',
         name: 'Gör långsiktiga inköp.',
-        localOrgText: 'Behöver du verkligen köpa nytt, välj då något av högre kvalité som håller längre och som är tillverkat i miljövänliga material. Om du köper en soffa kan du  undersöka om klädseln är avtagbar och tvättbar, eller om ett bord går att slipa ner.',
+        text: 'Behöver du verkligen köpa nytt, välj då något av högre kvalité som håller längre och som är tillverkat i miljövänliga material. Om du köper en soffa kan du  undersöka om klädseln är avtagbar och tvättbar, eller om ett bord går att slipa ner.',
         localOrgLink: [],
-        learnMoreText: 'Att inreda hållbart.',
+        learnMoreText: '<img src="images/objects/NM.0059952.jpg" width="141" height="190" class="learnMoreImage"/><p class="learnMoreText">Täljstenslampa från Grönland som eldas med sälfett, sent 1800-tal. Lampan höll länge och var jämförelsevis energisnål. NM.0059952</p>',
         learnMoreLink: 'https://malin.elledecoration.se/att-inreda-hallbart'
       }
     ]
@@ -109,7 +108,7 @@ var categories = {
         text: 'Spara på elen och uppvärmningen genom att täta springor i väggar och golv.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: 'Bo klimatsmart',
+        learnMoreText: '<img src="images/objects/NM.0126345.jpg" width="141" height="190" class="learnMoreImage"/><p class="learnMoreText">Rana (vävt tygstycke) från Vittangi i Lappland, innan 1915. Tygstycken har använts för att täta eller för att trivas med lägre inomhustemperatur NM.0126345</p>',
         learnMoreLink: 'https://www.folksam.se/tester-och-goda-rad/miljo-och-ansvar/bli-klimatsmart/bo-klimatsmart'
       },
       {
