@@ -76,7 +76,7 @@ var categories = {
         text: 'Inred ditt hem klimatsmart! Behöver du möbler, leksaker till barnen, handla second hand. Gå på loppis, kolla på blocket eller gå på auktion. Du får ofta kvalitetsmöbler för lägre pris än nytillverkade av sämre kvalité.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NM.0328242.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Smörkärna tillverkad i Gävle, 1910-tal. Köptes begagnad av en småländsk torparfamilj och användes under 1930- och 1940-tal. NM.0328242</p>',
         learnMoreLink: 'https://malin.elledecoration.se/att-inreda-hallbart'
       },
       {
@@ -85,7 +85,7 @@ var categories = {
         text: 'Har något hemma gått sönder? Laga själv, eller lämna in för lagning istället för att slänga och köpa nytt.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NM.0115566.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Spräckt och lagad skål från Östergötland, innan 1910. NM.0115566</p>',
         learnMoreLink: 'https://malin.elledecoration.se/att-inreda-hallbart'
       },
       {
@@ -141,7 +141,7 @@ var categories = {
         text: 'Om du låter bli att äta nötkött en gång i veckan under ett år undviker du 150 kilo växthusgasutsläpp. Du sparar även pengar &ndash; på ett år sparar du minst 450 kronor per person i hushållet genom att göra pastasås med bönor istället för med köttfärs.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NM.0403281.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Kornprov från Hämra i Ångermanland, 1896. NM.0403281</p>',
         learnMoreLink: 'http://www.stockholm.se/ByggBo/Leva-Miljovanligt/Klimatsmart-i-hemmet'
       },
       {
@@ -150,7 +150,7 @@ var categories = {
         text: 'Varje svensk slänger 28 kilo ätbar mat i soporna varje år. Med planerade matinköp samt rätt förvarade livsmedel kan ditt hushåll spara 3 000–6 000 kr per år. Förvara maten i den temperatur som producenten anger. ”Bäst före-datum” är en rekommendation och maten håller ofta att äta när datum gått ut.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NM.0311599.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Reklamskylt för lingonsylt och lingonsaft från Kalix. NM.0311599</p>',
         learnMoreLink: 'http://www.stockholm.se/ByggBo/Leva-Miljovanligt/Klimatsmart-i-hemmet'
       },
       {
@@ -159,7 +159,7 @@ var categories = {
         text: 'Fråga vad som är i säsong just nu. Potatis har liksom morot, broccoli och vitkål mycket liten klimatpåverkan eftersom de kan odlas nära och kan lagras länge. Ris har högre klimatpåverkan då det odlas i vatten och växtdelarnas nedbrytning bildar metangas. Ett alternativ till ris är matvete.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NMA.0062054.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Potatisskörd i Åre, Jämtland 1943. Foto Gunnar Lundh. NMA.0062054</p>',
         learnMoreLink: 'http://www.stockholm.se/ByggBo/Leva-Miljovanligt/Klimatsmart-i-hemmet'
       }
     ]
