@@ -52,7 +52,7 @@ var categories = {
         text: 'Istället för att köra bil. Gå över till pendeltåg, buss eller tunnelbana.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NMA.0058040.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Turistbuss i Holmajärvi, Norrbotten, 1946. NMA.0058040</p>',
         learnMoreLink: 'https://voxnadalen.naturskyddsforeningen.se/gron-guide/res-klimatsmart'
       },
       {
@@ -61,7 +61,7 @@ var categories = {
         text: 'När du ska åka längre eller åka på semester, åk då tåg istället för bil eller flyg. Tåget är bekvämt och är många gånger en upplevelse i sig. Resan blir en del av målet. Dessutom slipper du stressiga flygplatser, incheckning av bagage och säkerhetskontroller.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NMA.0046474.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Lillehammer tågstation, 1939. Foto: Gunnar Lundh. NMA.0046474</p>',
         learnMoreLink: 'https://voxnadalen.naturskyddsforeningen.se/gron-guide/res-klimatsmart'
       }
     ]
@@ -126,7 +126,7 @@ var categories = {
         text: 'Minska energiförbrukningen genom att stänga av TVn och datorn en kväll. Läs, eller samla familj och/eller vänner och spela ett roligt brädspel. Det är klimatsmart och roligt.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NM.0223731A-B.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Nordpolsspelet, tillverkat i Tyskland för svensk publik, 1890-tal. NM.0223731A-B</p>',
         learnMoreLink: 'http://www.stockholm.se/ByggBo/Leva-Miljovanligt/Klimatsmart-i-hemmet'
       }
     ]
