@@ -117,7 +117,7 @@ var categories = {
         text: 'När du badar i badkar går det åt 150 liter vatten. Energianvändningen för att värma det vattnet är 5,6 kWh. Jämför det med att ta en 5 minuters dusch då det kan gå åt 60 liter vatten som värms upp med 2,2 kWh. Unna dig gärna ett bad ibland, men gör det sällan. Det tjänar både du och miljön på.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '',
+        learnMoreText: '<img src="images/objects/NM.0319074.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Tvål, tillverkad i Nyköping 1970. NM.0319074</p>',
         learnMoreLink: 'http://www.stockholm.se/ByggBo/Leva-Miljovanligt/Klimatsmart-i-hemmet'
       },
       {
