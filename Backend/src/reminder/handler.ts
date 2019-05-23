@@ -18,6 +18,7 @@ declare const process: {
 const mailgun = Mailgun({
   apiKey: process.env.mailgunAPIKey,
   domain: process.env.mailgunDomain,
+  host: 'api.eu.mailgun.net'
 });
 
 export const reminder = async (event: IEventPayload, context, callback: ICallback) => {
