@@ -10,3 +10,9 @@ Poll/javascripts/secrets.js
 Backend/serverless.env.yml
 VotingApplication/.DS_Store
 .DS_Store
+Poll/javascripts/fonts/EksellDisplayWeb-Medium.eot
+Poll/javascripts/fonts/EksellDisplayWeb-Medium.woff
+Poll/javascripts/fonts/EksellDisplayWeb-Medium.woff2
+VotingApplication/fonts/EksellDisplayWeb-Medium.eot
+VotingApplication/fonts/EksellDisplayWeb-Medium.woff
+VotingApplication/fonts/EksellDisplayWeb-Medium.woff2
