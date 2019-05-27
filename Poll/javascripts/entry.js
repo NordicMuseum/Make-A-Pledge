@@ -135,7 +135,7 @@ class Entry extends React.Component {
         style={{
           color: '#fefaeb',
           fontSize: 35,
-          fontFamily: 'BrandonBody',
+          fontFamily: 'EksellDisplayWebMedium',
           flexDirection: 'column',
           textAlign: 'center',
           lineHeight: 1.5
@@ -212,7 +212,7 @@ class Entry extends React.Component {
             left: 40,
             color: '#fefaeb',
             fontSize: 70,
-            fontFamily: 'BrandonTitle'
+            fontFamily: 'EksellDisplayWebMedium'
           }}
         >
           {lang.heading}
@@ -225,7 +225,7 @@ class Entry extends React.Component {
           style={{
             color: '#fefaeb',
             fontSize: 90,
-            fontFamily: 'BrandonBody',
+            fontFamily: 'EksellDisplayWebMedium',
             flexDirection: 'column',
             textAlign: 'center',
             lineHeight: 1,
