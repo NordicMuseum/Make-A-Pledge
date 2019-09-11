@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Scene - English</title>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="/js/jquery-3.2.1.min.js" charset="utf-8"></script>
+    <script src="/data/secrets.js" charset="utf-8"></script>
+    <script src="/data/categories.js" charset="utf-8"></script>
+    <script src="/data/confirmationSynonyms.js" charset="utf-8"></script>
+    <script>
+
+      //////////////////////// EVENT EMITTERS ////////////////////////
+
+      function pledgeDone(data) {
+        animateTheVote();
+      }
+
+      function reminderDone(data) {
+        console.log(data);
+      }
+
+
+      function pledge(category) {
+        body = JSON.stringify({
+          category: category.charAt(0).toUpperCase() + category.slice(1),
+          computerLocation: "Right"
+        });
+        $.post({
+            url: 'https://gpo3k0bkb1.execute-api.us-east-2.amazonaws.com/production/pledge',
+            headers: { 'x-api-key': secret },
+            data: body,
+        })
+        .always(pledgeDone);
+        // 200 it worked
+        // anything else it didn't
+        // 500 server error out
+        // 400 bad request
+        // 401 forbidden
+        // 404 not found
+      }
+
+      function reminder(subcategory, email) {
+        console.log(subcategory);
+        // All the data you need is the email and the subcategory
+        body = JSON.stringify({
+          email: email,
+          subcategory: subcategory
+        });
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: 'https://gpo3k0bkb1.execute-api.us-east-2.amazonaws.com/production/reminder',
+            headers: { 'x-api-key': secret },
+            contentType: 'application/json',
+            data: body
+        })
+        .always(reminderDone);
+      }
+
+      //////////////////////// GLOBAL VARS ////////////////////////
+
+
+
+      var THANKS_TIMEOUT;
+      var SYNONYM_INDEX;
+      var SESSION_CATEGORY; // travels, clothing, purchases, food, living
+      var SESSION_ACTION; // 0, 1, 2
+
+      var idleTime = 0;
+
+
+
+      //////////////////////// FUNCTIONS ////////////////////////
+
+
+
+      function init() {
+        THANKS_TIMEOUT = null;
+        SYNONYM_INDEX = 0;
+        SESSION_CATEGORY = null;
+        SESSION_ACTION = null;
+
+
+        // Init click events
+        $(".category").bind('click', function() {
+          idleTime = 0;
+          startSession($(this).attr('id'));
+        });
+        $(".categoryLabel").bind('click', function() {
+          idleTime = 0;
+          startSession(($(this).attr('id')).slice(0, -5));
+        });
+
+        $(".closeModalButton").bind('click', function() {
+          idleTime = 0;
+          endSession();
+        });
+
+        $('.actionItem').each(function(index, item) {
+          $(item).bind('click', function() {
+            idleTime = 0;
+            SESSION_ACTION = index;
+            // Populate html with this action
+            $("#checklistlearnMoreText").html(categories[SESSION_CATEGORY].actions[SESSION_ACTION].learnMoreText);
+            var valign = ['top', 'initial', 'bottom'];
+            $("#checklistlearnMoreText").css({
+              'position': 'relative',
+              'top' : 210*SESSION_ACTION,
+            });
+            // Highlight the correct checkbox
+            $(".itemCheckboxImage").attr('src', '/images/unchecked_box.png');
+            $($(".itemCheckboxImage")[SESSION_ACTION]).attr('src', '/images/checked_box.png');
+            // Show submit button
+            $("#submitActionButton").removeClass('hide');
+          });
+        });
+
+        $("#submitActionButton").bind('click', function() {
+          idleTime = 0;
+          $("#checklistLogo").addClass('grow');
+          $("#submitActionButton").addClass('hide');
+          pledge(SESSION_CATEGORY);
+        });
+
+        $("#confirmationEmailQuestionNoButton").bind('click', function() {
+          showModal('thanks');
+          idleTime = 0;
+        });
+
+        $("#confirmationEmailQuestionYesButton").bind('click', function() {
+          idleTime = 0;
+          showModal('email');
+        });
+
+        $("#submitEmail").click(function() {
+          idleTime = 0;
+          var categoryObject = categories[SESSION_CATEGORY];
+          var action = categoryObject.actions[SESSION_ACTION].id;
+          reminder(action, $('#write').val());
+          showModal('thanks');
+        });
+      }
+
+    // Code for keyboard from Vasili
+    // @ https://code.tutsplus.com/tutorials/creating-a-keyboard-with-css-and-jquery--net-5774
+    function initKeyboard() {
+        $(function(){
+          var $write = $('#write'),
+          shift = false,
+          capslock = false;
+          $('.capslock').removeClass('highlighted');
+
+          $('#keyboard li').click( function() {
+            idleTime = 0;
+            var $this = $(this);
+            var character = $this.html();
+
+            // Shift keys
+            if ($this.hasClass('left-shift')) {
+              $('.letter').addClass('uppercase');
+              $('.symbol span').toggle();
+              shift = (shift === true) ? false : true;
+              capslock = false;
+              $('.capslock').removeClass('highlighted');
+              $this.addClass('highlighted');
+              return false;
+            }
+
+            // Caps lock
+            if ($this.hasClass('capslock')) {
+              $('.letter').toggleClass('uppercase');
+              if (capslock) {
+                capslock = false;
+                $('.capslock').removeClass('highlighted');
+              } else {
+                capslock = true;
+                $('.capslock').addClass('highlighted');
+              }
+              return false;
+            }
+
+            // Delete
+            if ($this.hasClass('delete')) {
+              var html = $write.html();
+              $write.html(html.substr(0, html.length - 1));
+              if ($write.val().length === 0) {
+                $("#submitEmail").addClass('hide');
+              }
+              return false;
+            }
+
+            // Special characters
+            if ($this.hasClass('symbol')) character = $('span:visible', $this).html();
+            if ($this.hasClass('space')) character = ' ';
+
+            // Uppercase letter
+            if ($this.hasClass('uppercase')) character = character.toUpperCase();
+
+            // Remove shift once a key is clicked.
+            if (shift === true) {
+              $('.symbol span').toggle();
+              if (capslock === false) $('.letter').toggleClass('uppercase');
+              shift = false;
+              $('.left-shift').removeClass('highlighted');
+            }
+
+            // Add the character
+            $write.html($write.html() + character);
+            if ($write.val().length > 0) {
+              $("#submitEmail").removeClass('hide');
+            } else {
+              $("#submitEmail").addClass('hide');
+            }
+          });
+        });
+      }
+
+
+
+      function startSession(category) {
+        // Hide lure screen labels, prompt, and click events
+        $("#caption").addClass( "hide" );
+        $(".categoryLabel").addClass( "hide" );
+        $(".categoryLabel").unbind( "click" );
+        $(".category").unbind( "click" );
+        $("#map").css("opacity", 0.5);
+
+        // Store category selection
+        console.log(category)
+        SESSION_CATEGORY = category;
+
+        // Present checklist modal
+        showModal('checklist');
+      }
+
+
+
+      function endSession() {
+
+        // Close modals
+        $('.modal').addClass('hide');
+
+        // Put logo back
+        $("#checklistLogo").removeClass('voted');
+        $("#checklistLogo").removeClass('grow');
+
+        // Reset lure screen
+        $(".category").bind('click', function() {
+          idleTime = 0;
+          startSession(($(this).attr('id')));
+        });
+        $(".categoryLabel").bind('click', function() {
+          idleTime = 0;
+          startSession(($(this).attr('id')).slice(0, -5));
+        });
+        $(".categoryLabel").removeClass( "hide" );
+        $("#caption").removeClass( "hide" );
+        $("#map").css("opacity", 1);
+
+        // Clear thanks timeout
+        if (THANKS_TIMEOUT !== null) {
+          window.clearTimeout(THANKS_TIMEOUT);
+          THANKS_TIMEOUT = null;
+        }
+
+        // Clear divs, html, applied style
+        $("#checklistlearnMoreText").html('');
+        $(".itemCheckboxImage").attr('src', '/images/unchecked_box.png');
+        $('#write').html('');
+        $("#submitActionButton").addClass('hide');
+
+        // Reset session selections
+        SESSION_CATEGORY = null;
+        SESSION_ACTION = null;
+      }
+
+
+
+      function showModal(modal) {
+        var categoryObject = categories[SESSION_CATEGORY];
+
+        switch (modal) {
+
+          case 'checklist':
+            // Populate checklist html
+            $('#checklistPrompt').html(categoryObject.name.toUpperCase());
+            for (var i = 0; i < 3; i++) {
+              $($(".actionItemName")[i]).html(categoryObject.actions[i].name);
+              $($(".actionItemText")[i]).html(categoryObject.actions[i].text);
+            }
+            $("#checklistLogo").attr('src', '/images/'+categories[SESSION_CATEGORY].icon)
+
+            // Show checklist modal
+            $('#checklistModal').removeClass('hide');
+
+            break;
+
+          case 'confirmation':
+            // Populate confirmation html
+            var actionName = categoryObject.actions[SESSION_ACTION].name.toLowerCase();
+            if (categoryObject.actions[SESSION_ACTION].altName !== undefined) {
+              actionName = categoryObject.actions[SESSION_ACTION].altName.toLowerCase();
+            }
+            $('#confirmationAction').html(actionName);
+            $('#confirmationTitle').html(confirmationSynonyms[SYNONYM_INDEX]);
+            $('#emailPrompt').html("Vill du att vi skickar ett  bekräftelsemail med ytterligare information om ditt löfte att göra en insats kopplad till " + categories[SESSION_CATEGORY].name.toLowerCase() + "?");
+            SYNONYM_INDEX = (SYNONYM_INDEX + 1) % confirmationSynonyms.length;
+
+            // Hide checklist and show confirmation
+            $('#checklistModal').addClass('hide');
+            $('#confirmationModal').removeClass('hide');
+
+            break;
+
+          case 'email':
+            // Hide confirmation and show email
+            $('#confirmationModal').addClass('hide');
+            $('#emailModal').removeClass('hide');
+
+            break;
+
+          case 'thanks':
+            // Hide email or confirmation modal and show thanks modal
+            $('#emailModal').addClass('hide');
+            $('#confirmationModal').addClass('hide');
+            $('#thanksModal').removeClass('hide');
+
+            // Start timeout for thanks screen
+            THANKS_TIMEOUT = window.setTimeout(function() { endSession(); }, 3000)
+
+            break;
+
+          default:
+            endSession();
+            break;
+        }
+      }
+
+
+
+      function animateTheVote() {
+        $("#checklistLogo").addClass('voted');
+        window.setTimeout(function() {
+          showModal('confirmation');
+        }, 3000);
+      }
+
+
+
+      //////////////////////// ON READY ////////////////////////
+
+
+      function touchHandler(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+      }
+
+      function timerIncrement(ms) {
+        idleTime = idleTime + ms;
+        if (idleTime > 80000) { // 80 seconds
+          idleTime = 0;
+          endSession();
+        }
+      }
+
+      $(document).ready(function() {
+        init();
+        initKeyboard();
+
+        $('html').css({
+          // FIXME '-webkit-transform': 'rotate(180deg)',
+          // FIXME ' -moz-transform': 'rotate(180deg)',
+          'width': '100%',
+          'height': '100%',
+          'top': '1000px'
+        });
+
+        // debugging
+        window.addEventListener('keydown', function(e) {
+          // touch events - disable zoom
+          window.addEventListener('ontouchstart', touchHandler, false);
+          window.addEventListener('ontouchend', touchHandler, false);
+          window.addEventListener('touchcancel', touchHandler, false);
+          window.addEventListener('touchmove', touchHandler, false);
+          window.addEventListener('wheel', touchHandler, false);
+
+          // Listener to tell when someone has walked away from the app
+          // Check every 5 seconds
+          // Increment the idle time counter every minute.
+          var idleInterval = setInterval(function() {
+            timerIncrement(5000);
+          }, 5000);
+        });
+
+    });
+
+    </script>
+    <script>if (window.module) module = window.module;</script>
+    <style type="text/css">
+
+      /* General Style */
+
+      * {
+        /* FIXME cursor: url(cursor.cur), auto;*/
+      }
+
+      body {
+        overflow: hidden !important;
+        width: 1920px;
+        height: 1080px;
+        margin: 0px;
+        -webkit-user-select: none !important;
+      }
+
+      body {
+        overflow: hidden;
+        -webkit-user-select: none;
+        background-color: #373735; /* black */
+      }
+
+      @font-face {
+        font-family: 'GillSansLight';
+        src: url('fonts/Gill_Sans_Light.woff') format('woff');
+      }
+
+      @font-face {
+        font-family: 'GillSansBold';
+        src: url('fonts/Gill_Sans_Bold.woff') format('woff');
+      }
+
+/* Webfonts: Copyright © Letters From Sweden. All rights reserved. To obtain a license, please see: https://lettersfromsweden.se */
+
+      @font-face {
+        font-family: 'EksellDisplayWebMedium';
+        src: url('fonts/EksellDisplayWeb-Medium.woff') format('woff');
+      }
+
+      .title {
+        font-size: 32px;
+        line-height: 1;
+        color: #e9efe7; /* white */
+        font-family: 'EksellDisplayWebMedium';
+      }
+
+      .subtitle {
+        font-size: 40px !important;
+        color: #e9efe7 !important; /* white */
+        font-family: 'EksellDisplayWebMedium' !important;
+      }
+
+      .instruction {
+        font-family: 'GillSansLight';
+        color: #bdcc9b; /* light green */
+        font-size: 30px;
+        line-height: 1.2;
+      }
+
+      .body {
+        font-family: 'GillSansLight';
+        color: #bec4ba; /* light gray */
+        font-size: 24px;
+        line-height: 1.2;
+      }
+
+      .bodyBold {
+        font-family: 'GillSansBold' !important;
+        color: #bdcc9b; /* light green */
+      }
+
+      .shadow {
+        box-shadow: 0px 0px 2px #373735;
+      }
+
+      .clickable {
+        background-color: #2d606f; /* base middle blue */
+        color:  #e9efe7; /* white */
+        text-align: center;
+        font-size: 28px;
+        font-family: 'GillSansBold';
+      }
+
+      .clickable:active, .clickable:hover {
+        background-color: #72b5b1; /* highlight blue */
+        box-shadow: 0px 0px 0px rgba(55, 55, 53, 0.5);
+      }
+
+      .hide {
+        display: none !important;
+      }
+
+      .modal {
+        background-color: rgba(4, 70, 78, 0.85);  /* base darkest blue */
+        position: absolute;
+        top: 50px;
+        bottom: 75px;
+        left: 50px;
+        right: 50px;
+        border-radius: 7px;
+        padding: 75px;
+      }
+
+      .smallModal {
+        top: 43%;
+        left: 40%;
+        right: 40%;
+        bottom: 43%;
+        padding: 0px;
+        padding-top: 2.5%;
+        padding-left: 6.1%;
+      }
+
+      .closeModalButton {
+        position: absolute;
+        top: -25px;
+        right: -25px;
+        height: 55px;
+        width: 80px;
+        padding-top: 25px;
+        border-radius: 50px;
+      }
+
+      #map,
+      #clickableOverlay {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        max-width:100%;
+      }
+
+
+      /* Lure Screen Style */
+
+      #caption {
+        position: absolute;
+        top: 8%;
+        right: 5%;
+      }
+
+      .categoryLabel {
+        position: absolute;
+        padding: 15px 40px;
+        text-align: center;
+        border-radius: 7px;
+        background-color: rgba(4, 70, 78, 0.85);  /* base darkest blue */
+      }
+
+      #LivingLabel {
+        top: 19.5%;
+        left: 30%;
+      }
+
+      #TravelsLabel {
+        top: 55%;
+        left: 41%;
+      }
+
+      #FoodLabel {
+        top: 30%;
+        left: 70%;
+      }
+
+      #PurchasesLabel {
+        top: 68%;
+        left: 73%;
+      }
+
+      #ClothingLabel {
+        top: 65%;
+        left: 10%;
+      }
+
+
+      /* Checklist Modal Style */
+
+      #checklistLogo {
+        display: inline-block;
+        height: 150px;
+        width: 150px;
+        border-radius: 75px;
+        margin-right: 50px;
+        vertical-align: middle;
+        will-change: top, scale;
+        transition: transform 1s;
+      }
+
+      .voted {
+        position: relative;
+        animation-duration: 1.5s;
+        animation-timing-function: ease-in;
+        animation-name: voted;
+        animation-fill-mode: forwards;
+      }
+
+      .grow {
+        transform: scale(1.2);
+      }
+
+      @keyframes voted {
+        from { top: 0px; }
+        to { top: -1000px; }
+      }
+
+      #checklistHeader {
+        margin-bottom: 20px;
+      }
+
+      #checklistHeaderText {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      #checklistPrompt {
+        padding-bottom: 20px;
+      }
+
+      #checklistBody {
+        position: relative;
+      }
+
+      #checklistContainer {
+        display: inline-block;
+        width: 750px;
+        padding-top: 20px;
+      }
+
+      #checklistSeparator {
+        display: inline-block;
+        width: 5px;
+        position: absolute;
+        top: 0%;
+        padding-top: 30px;
+        bottom: 0%;
+        border-radius: 2.5px;
+        background-color: #2d606f; /* base middle blue */
+      }
+
+
+      .actionItem {
+        display: block;
+        height: 210px;
+      }
+
+      .actionItemCheckbox {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        margin-right: 30px;
+        vertical-align: top;
+        position: relative;
+      }
+
+      .itemCheckboxImage {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+      }
+
+      .actionItemBody {
+        display: inline-block;
+        vertical-align: top;
+        width: 620px;
+      }
+
+      .actionItemName {
+        line-height: 40px;
+        padding-bottom: 15px;
+      }
+
+      #checklistlearnMoreText {
+        color: #d2d940; /* hightlight yellow */
+        display: inline-block;
+        width: 600px;
+        vertical-align: top;
+        padding-top: 30px;
+        margin-left: 50px;
+      }
+
+      .learnMoreImage {
+        float: left;
+        padding-right: 20px;
+      }
+
+      .learnMoreText {
+        margin-top: 0px;
+      }
+
+      #submitActionButton {
+        position: absolute;
+        bottom: -40px;
+        right: 30px;
+        height: 80px;
+        padding: 0px 40px;
+        border-radius: 40px;
+        line-height: 80px;
+      }
+
+
+      /* Confirmation Modal Style */
+
+      #confirmationContainer {
+        width: 95%;
+        padding-top: 80px;
+        margin: auto;
+      }
+
+      #confirmationTitle {
+        padding-bottom: 10px;
+      }
+
+      #confirmationSubtitle {
+      }
+
+      #confirmationEmailQuestion {
+        padding-top: 100px;
+        padding-bottom: 60px;
+        line-height: 1.2;
+      }
+
+      #confirmationEmailPrivacyStatement {
+        padding-bottom: 240px;
+        font-size: 25px;
+        line-height: 30px;
+      }
+
+      #confirmationAction {
+        color: #d2d940; /* hightlight yellow */
+      }
+
+      #confirmationEmailQuestionNoButton, #confirmationEmailQuestionYesButton {
+        display: inline-block;
+        height: 80px;
+        padding: 0px 40px;
+        border-radius: 40px;
+        line-height: 80px;
+        margin-right: 50px;
+        margin-bottom: 160px;
+      }
+
+
+      /* Email Modal Style */
+
+      #container {
+        width: 1218px;
+        margin: auto;
+      }
+
+      #emailTextbox {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        height: 80px;
+      }
+
+      #write {
+        vertical-align: top;
+        display: inline-block;
+        font-size: 50px;
+        line-height: 80px;
+        font-family: 'GillSansLight';
+        padding: 10px;
+        padding-top: 0px;
+        width: 1197px;
+        margin-right: 10px;
+        height: 70px;
+        background: #fff;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        resize: none;
+        border: none;
+      }
+
+      #write:focus {
+        outline: none;
+      }
+
+
+      #submitEmail {
+        position: absolute;
+        bottom: -40px;
+        right: 30px;
+        height: 80px;
+        padding: 0px 40px;
+        border-radius: 40px;
+        line-height: 80px;
+      }
+
+
+
+      /* Keyboard Style */
+
+      #keyboard {
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+      }
+
+      #keyboard li {
+        float: left;
+        margin: 0 5px 5px 0;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        font-size: 40px;
+        font-family: 'GillSansLight';
+        vertical-align: middle;
+        text-align: center;
+        background-color: #2d606f; /* base middle blue */
+        color:  #e9efe7; /* white */
+        text-align: center;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+      }
+
+      #keyboard .invisibleKey {
+        visibility: hidden;
+        margin: 0px;
+        background-color: red;
+        clear: left;
+      }
+
+      #keyboard .email,
+      #keyboard .left-shift,
+      #keyboard .capslock {
+        width: auto;
+        font-size: 32px;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .lastitem {
+        margin-right: 0;
+        clear: right;
+      }
+
+      .uppercase {
+        text-transform: uppercase;
+      }
+
+      #keyboard .space {
+        width: 681px;
+      }
+
+      .on {
+        display: none;
+      }
+
+      #keyboard li:active {
+        position: relative;
+        top: 1px;
+        left: 1px;
+        background-color: #72b5b1; /* highlight blue */
+      }
+
+      .highlighted {
+        background-color: #72b5b1 !important; /* highlight blue */
+      }
+
+      /* Thanks Modal Style */s
+
+      #thanksText {
+        text-align: center;
+        width: 100%;
+        margin: auto;
+      }
+
+      @keyframes sparkle {
+        0%   { opacity: 1; }
+        35%   { opacity: 0.0; }
+        45% {opacity: 0.0}
+        80%  { opacity: 1; }
+      }
+
+      .category {
+        animation-name: sparkle;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-duration: 12s;
+        background-color: #04464e !important;
+        fill: rgba(4, 70, 78, 0.4);
+        opacity: 1;
+        will-change: opacity;
+      }
+
+
+
+    </style>
+</head>
+<body>
+  <img id="map" src="/images/Jamal.jpg" />
+
+
+  <!-- Caption -->
+  <div id="caption" class="title">
+    Allting du gör här påverkar Arktis.<br>
+    Välj ett miljöområde där<br>
+    du kan förändra ditt beteende.
+  </div>
+
+  <!-- Category Labels -->
+  <div class="categoryLabel shadow clickable subtitle" id="ClothingLabel">Kläder</div>
+  <div class="categoryLabel shadow clickable subtitle" id="PurchasesLabel">Prylar</div>
+  <div class="categoryLabel shadow clickable subtitle" id="FoodLabel">Mat</div>
+  <div class="categoryLabel shadow clickable subtitle" id="TravelsLabel">Resor</div>
+  <div class="categoryLabel shadow clickable subtitle" id="LivingLabel">Boende</div>
+
+  <!-- Modals -->
+  <div class="modal largeModal shadow hide" id="checklistModal">
+    <div id="checklistHeader">
+      <img id="checklistLogo" class="shadow" src="/images/habitat_icon.png" width="150" height="150" draggable="false" />
+      <div id="checklistHeaderText">
+        <div id="checklistPrompt" class="title">
+          Jag lovar att förbättra mitt förhållningssätt till:
+        </div>
+        <div id="checklistInstruction" class="instruction">
+          Välj ett av alternativen och tryck sedan på "lova!"<br/>
+          Du väljer sedan om du vill bli påmind om vad du lovat att förändra.<br/>
+          <br/>
+          Rösträkningen ovan visar vad våra besökare lovat att förändra.
+        </div>
+      </div>
+    </div>
+    <div id="checklistBody">
+      <div id="checklistContainer">
+        <div class="actionItem">
+          <div class="actionItemCheckbox">
+            <img class="itemCheckboxImage" src="/images/unchecked_box.png" draggable="false" />
+          </div>
+          <div class="actionItemBody">
+            <div class="actionItemName title"></div>
+            <div class="actionItemText body"></div>
+          </div>
+        </div>
+        <div class="actionItem">
+          <div class="actionItemCheckbox">
+            <img class="itemCheckboxImage" src="/images/unchecked_box.png" draggable="false" />
+          </div>
+          <div class="actionItemBody">
+            <div class="actionItemName title"></div>
+            <div class="actionItemText body"></div>
+          </div>
+        </div>
+        <div class="actionItem lastAction">
+          <div class="actionItemCheckbox">
+            <img class="itemCheckboxImage" src="/images/unchecked_box.png" draggable="false" />
+          </div>
+          <div class="actionItemBody">
+            <div class="actionItemName title"></div>
+            <div class="actionItemText body"></div>
+          </div>
+        </div>
+      </div>
+      <div id="checklistSeparator">
+      </div>
+      <div id="checklistlearnMoreText" class="body">
+      </div>
+    </div>
+    <div class="closeModalButton clickable shadow">
+      <img src="/images/dismiss_icon.png" width="30" height="30" draggable="false" />
+    </div>
+    <div id="submitActionButton" class="hide clickable shadow">
+      LOVA!
+    </div>
+  </div>
+
+  <div class="modal largeModal shadow hide" id="confirmationModal">
+    <div id="confirmationContainer">
+      <div id="confirmationTitle" class="title"></div>
+      <div id="confirmationSubtitle" class="title">Du lovar att förbättre ditt förhållningssätt till <span id="confirmationAction"></span></div>
+      <div id="confirmationEmailQuestion" class="subtitle">
+        Enskilda handlingar är viktiga. Det finns mycket man kan göra för att förbättra sin inverkan på klimatet.<br>
+        <span id="emailPrompt">Vill du att vi skickar ett  bekräftelsemail med ytterligare information om ditt löfte?</span>
+      </div>
+      <div id="confirmationEmailQuestionButtons">
+        <div id="confirmationEmailQuestionNoButton" class="clickable shadow">
+          NEJ
+        </div>
+        <div id="confirmationEmailQuestionYesButton" class="clickable shadow">
+          JA
+        </div>
+      </div>
+      <div id="confirmationEmailPrivacyStatement" class="body">
+        Vi kommer bara att använda din epostadress till att skicka ett uppföljningsmail med ytterligare information om ditt löfte.<br />
+        Vi kommer inte att använda den till att skicka skräppost.
+      </div>
+    </div>
+    <div class="closeModalButton clickable shadow">
+      <img src="/images/dismiss_icon.png" width="30" height="30" draggable="false" />
+    </div>
+  </div>
+
+  <div class="modal largeModal shadow hide" id="emailModal">
+    <div id="container">
+      <div id='emailTextbox'>
+        <textarea id="write" rows="1" resizeable="no" readonly></textarea>
+      </div>
+      <ul id="keyboard">
+          <li class="invisibleKey" style="width: 2.5px"></li>
+          <li class="email firstitem">@gmail.com</li>
+          <li class="email">@yahoo.com</li>
+          <li class="email">@hotmail.com</li>
+          <li class="email">@outlook.com</li>
+          <li class="symbol"><span class="off">@</span><span class="on">@</span></li>
+          <li class="email lastitem">.se</li>
+          <li class="invisibleKey" style="width: 0px"></li>
+          <li class="symbol firstitem"><span class="off">1</span><span class="on">!</span></li>
+          <li class="symbol"><span class="off">2</span><span class="on">@</span></li>
+          <li class="symbol"><span class="off">3</span><span class="on">#</span></li>
+          <li class="symbol"><span class="off">4</span><span class="on">$</span></li>
+          <li class="symbol"><span class="off">5</span><span class="on">%</span></li>
+          <li class="symbol"><span class="off">6</span><span class="on">^</span></li>
+          <li class="symbol"><span class="off">7</span><span class="on">&amp;</span></li>
+          <li class="symbol"><span class="off">8</span><span class="on">*</span></li>
+          <li class="symbol"><span class="off">9</span><span class="on">(</span></li>
+          <li class="symbol"><span class="off">0</span><span class="on">)</span></li>
+          <li class="symbol"><span class="off">_</span><span class="on">~</span></li>
+          <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+          <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+          <li class="delete lastitem">⌫</li>
+          <li class="invisibleKey" style="width: 56px"></li>
+          <li class="letter">q</li>
+          <li class="letter">w</li>
+          <li class="letter">e</li>
+          <li class="letter">r</li>
+          <li class="letter">t</li>
+          <li class="letter">y</li>
+          <li class="letter">u</li>
+          <li class="letter">i</li>
+          <li class="letter">o</li>
+          <li class="letter">p</li>
+          <li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+          <li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+          <li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+          <li class="invisibleKey" style="width: 67.5px"></li>
+          <li class="capslock">caps lock</li>
+          <li class="letter">a</li>
+          <li class="letter">s</li>
+          <li class="letter">d</li>
+          <li class="letter">f</li>
+          <li class="letter">g</li>
+          <li class="letter">h</li>
+          <li class="letter">j</li>
+          <li class="letter">k</li>
+          <li class="letter">l</li>
+          <li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+          <li class="symbol lastitem"><span class="off">'</span><span class="on">&quot;</span></li>
+          <li class="invisibleKey" style="width: 138.5px"></li>
+          <li class="left-shift">shift</li>
+          <li class="letter">z</li>
+          <li class="letter">x</li>
+          <li class="letter">c</li>
+          <li class="letter">v</li>
+          <li class="letter">b</li>
+          <li class="letter">n</li>
+          <li class="letter">m</li>
+          <li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+          <li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+          <li class="symbol lastitem"><span class="off">/</span><span class="on">?</span></li>
+          <li class="invisibleKey" style="width: 268px"></li>
+          <li class="space lastitem">&nbsp;</li>
+      </ul>
+    </div>
+    <div class="closeModalButton clickable shadow">
+      <img src="/images/dismiss_icon.png" width="30" height="30" draggable="false" />
+    </div>
+     <div id="submitEmail" class="hide clickable shadow">SKICKA!</div>
+  </div>
+
+  <div class="modal smallModal shadow hide" id="thanksModal">
+    <div id="thanksText" class="title">Tack!</div>
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "name": "make-a-pledge-web",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "webpack --progress --colors",
+    "prebuild": "sh assemble.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "EarthPeople AB <earthpeople.se>",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "aws-mqtt": "^1.0.0",
+    "aws-sdk": "^2.526.0",
+    "express": "^4.17.1",
+    "gsap": "^2.1.3",
+    "react": "^16.9.0",
+    "react-addons-transition-group": "^15.6.2",
+    "react-dom": "^16.9.0",
+    "react-style": "^0.5.5",
+    "react-transition-group": "^4.3.0",
+    "recharts": "^1.7.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
+  }
+}
