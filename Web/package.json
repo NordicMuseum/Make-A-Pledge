@@ -7,6 +7,8 @@
     "start": "node index.js",
     "build": "webpack --progress --colors",
     "prebuild": "sh assemble.sh",
+    "create:publishable": "sh publishable.sh",
+    "precreate:publishable": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "EarthPeople AB <earthpeople.se>",

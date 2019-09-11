@@ -96,3 +96,5 @@ assets/js/poll.js
 assets/data/*
 !**/.gitkeep
 assets/poll
+/publish
+publish.zip
