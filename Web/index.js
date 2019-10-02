@@ -11,8 +11,8 @@ const AVAILABLE_LOCALES = [
 app.use(express.static(path.resolve(__dirname, 'assets')))
 app.use(express.static(path.resolve(__dirname, 'assets/poll')))
 
-app.get('/make-a-pledge', (_, res) => res.status(404).send('Not Found'))
-app.get('/make-a-pledge/:locale/vote', (req, res) => {
+app.get('/', (_, res) => res.status(404).send('Not Found'))
+app.get('//:locale/vote', (req, res) => {
   // Only allow available locales
   if (!AVAILABLE_LOCALES.some(locale => locale === req.params.locale)) {
     res.status(404).end()
@@ -21,7 +21,7 @@ app.get('/make-a-pledge/:locale/vote', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'pages', `vote-${req.params.locale}.html`))
 })
 
-app.get('/make-a-pledge/:locale/poll', (req, res) => {
+app.get('//:locale/poll', (req, res) => {
   // Only allow available locales
   if (!AVAILABLE_LOCALES.some(locale => locale === req.params.locale)) {
     res.status(404).end()

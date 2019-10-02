@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <title>Scene - English</title>
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <script src="/js/jquery-3.2.1.min.js" charset="utf-8"></script>
-    <script src="/data/secrets.js" charset="utf-8"></script>
-    <script src="/data/categories.js" charset="utf-8"></script>
-    <script src="/data/confirmationSynonyms.js" charset="utf-8"></script>
+    <script src="/make-a-pledge/js/jquery-3.2.1.min.js" charset="utf-8"></script>
+    <script src="/make-a-pledge/data/secrets.js" charset="utf-8"></script>
+    <script src="/make-a-pledge/data/categories.js" charset="utf-8"></script>
+    <script src="/make-a-pledge/data/confirmationSynonyms.js" charset="utf-8"></script>
     <script>
 
       //////////////////////// EVENT EMITTERS ////////////////////////
@@ -109,8 +109,8 @@
               'top' : 210*SESSION_ACTION,
             });
             // Highlight the correct checkbox
-            $(".itemCheckboxImage").attr('src', '/images/unchecked_box.png');
-            $($(".itemCheckboxImage")[SESSION_ACTION]).attr('src', '/images/checked_box.png');
+            $(".itemCheckboxImage").attr('src', '/make-a-pledge/images/unchecked_box.png');
+            $($(".itemCheckboxImage")[SESSION_ACTION]).attr('src', '/make-a-pledge/images/checked_box.png');
             // Show submit button
             $("#submitActionButton").removeClass('hide');
           });
@@ -266,7 +266,7 @@
 
         // Clear divs, html, applied style
         $("#checklistlearnMoreText").html('');
-        $(".itemCheckboxImage").attr('src', '/images/unchecked_box.png');
+        $(".itemCheckboxImage").attr('src', '/make-a-pledge/images/unchecked_box.png');
         $('#write').html('');
         $("#submitActionButton").addClass('hide');
 
@@ -289,7 +289,7 @@
               $($(".actionItemName")[i]).html(categoryObject.actions[i].name);
               $($(".actionItemText")[i]).html(categoryObject.actions[i].text);
             }
-            $("#checklistLogo").attr('src', '/images/'+categories[SESSION_CATEGORY].icon)
+            $("#checklistLogo").attr('src', '/make-a-pledge/images/'+categories[SESSION_CATEGORY].icon)
 
             // Show checklist modal
             $('#checklistModal').removeClass('hide');
@@ -422,19 +422,19 @@
 
       @font-face {
         font-family: 'GillSansLight';
-        src: url('fonts/Gill_Sans_Light.woff') format('woff');
+        src: url('/make-a-pledge/fonts/Gill_Sans_Light.woff') format('woff');
       }
 
       @font-face {
         font-family: 'GillSansBold';
-        src: url('fonts/Gill_Sans_Bold.woff') format('woff');
+        src: url('/make-a-pledge/fonts/Gill_Sans_Bold.woff') format('woff');
       }
 
 /* Webfonts: Copyright © Letters From Sweden. All rights reserved. To obtain a license, please see: https://lettersfromsweden.se */
 
       @font-face {
         font-family: 'EksellDisplayWebMedium';
-        src: url('fonts/EksellDisplayWeb-Medium.woff') format('woff');
+        src: url('/make-a-pledge/fonts/EksellDisplayWeb-Medium.woff') format('woff');
       }
 
       .title {
@@ -890,7 +890,7 @@
     </style>
 </head>
 <body>
-  <img id="map" src="/images/Jamal.jpg" />
+  <img id="map" src="/make-a-pledge/images/Jamal.jpg" />
 
 
   <!-- Caption -->
@@ -910,7 +910,7 @@
   <!-- Modals -->
   <div class="modal largeModal shadow hide" id="checklistModal">
     <div id="checklistHeader">
-      <img id="checklistLogo" class="shadow" src="/images/habitat_icon.png" width="150" height="150" draggable="false" />
+      <img id="checklistLogo" class="shadow" src="/make-a-pledge/images/habitat_icon.png" width="150" height="150" draggable="false" />
       <div id="checklistHeaderText">
         <div id="checklistPrompt" class="title">
           Jag lovar att förbättra mitt förhållningssätt till:
@@ -927,7 +927,7 @@
       <div id="checklistContainer">
         <div class="actionItem">
           <div class="actionItemCheckbox">
-            <img class="itemCheckboxImage" src="/images/unchecked_box.png" draggable="false" />
+            <img class="itemCheckboxImage" src="/make-a-pledge/images/unchecked_box.png" draggable="false" />
           </div>
           <div class="actionItemBody">
             <div class="actionItemName title"></div>
@@ -936,7 +936,7 @@
         </div>
         <div class="actionItem">
           <div class="actionItemCheckbox">
-            <img class="itemCheckboxImage" src="/images/unchecked_box.png" draggable="false" />
+            <img class="itemCheckboxImage" src="/make-a-pledge/images/unchecked_box.png" draggable="false" />
           </div>
           <div class="actionItemBody">
             <div class="actionItemName title"></div>
@@ -945,7 +945,7 @@
         </div>
         <div class="actionItem lastAction">
           <div class="actionItemCheckbox">
-            <img class="itemCheckboxImage" src="/images/unchecked_box.png" draggable="false" />
+            <img class="itemCheckboxImage" src="/make-a-pledge/images/unchecked_box.png" draggable="false" />
           </div>
           <div class="actionItemBody">
             <div class="actionItemName title"></div>
@@ -959,7 +959,7 @@
       </div>
     </div>
     <div class="closeModalButton clickable shadow">
-      <img src="/images/dismiss_icon.png" width="30" height="30" draggable="false" />
+      <img src="/make-a-pledge/images/dismiss_icon.png" width="30" height="30" draggable="false" />
     </div>
     <div id="submitActionButton" class="hide clickable shadow">
       LOVA!
@@ -988,7 +988,7 @@
       </div>
     </div>
     <div class="closeModalButton clickable shadow">
-      <img src="/images/dismiss_icon.png" width="30" height="30" draggable="false" />
+      <img src="/make-a-pledge/images/dismiss_icon.png" width="30" height="30" draggable="false" />
     </div>
   </div>
 
@@ -1064,7 +1064,7 @@
       </ul>
     </div>
     <div class="closeModalButton clickable shadow">
-      <img src="/images/dismiss_icon.png" width="30" height="30" draggable="false" />
+      <img src="/make-a-pledge/images/dismiss_icon.png" width="30" height="30" draggable="false" />
     </div>
      <div id="submitEmail" class="hide clickable shadow">SKICKA!</div>
   </div>
