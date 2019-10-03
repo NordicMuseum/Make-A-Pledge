@@ -268,13 +268,15 @@ body {
   flex: 1;
 }
 
-.actionItemName {
+.actionItemName, div#checklistlearnMoreText h2 {
   line-height: 40px;
   padding-bottom: 15px;
   font-size: 32px;
   line-height: 1;
   color: #e9efe7; /* white */
   font-family: 'EksellDisplayWebMedium';
+  font-weight: normal;
+  margin: 0;
 }
 
 #checklistlearnMoreText {
