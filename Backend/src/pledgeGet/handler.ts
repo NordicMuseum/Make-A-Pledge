@@ -11,6 +11,10 @@ export const pledgeGet = async (event: IEventPayload, context, callback: ICallba
   if (pledges == null) {
     callback(null, {
       statusCode: HTTPStatusCodes.InternalServerError,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: "Server Error. Check server error logs.",
     });
     return;
@@ -29,6 +33,10 @@ export const pledgeGet = async (event: IEventPayload, context, callback: ICallba
 
   callback(null, {
     statusCode: HTTPStatusCodes.OK,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    },
     body: JSON.stringify(response),
   });
 }
