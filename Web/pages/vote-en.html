@@ -185,7 +185,7 @@
               var html = $write.html();
               $write.html(html.substr(0, html.length - 1));
               if ($write.val().length === 0) {
-                $("#submitEmail").addClass('hide');
+                //$("#submitEmail").addClass('hide');
               }
               return false;
             }
@@ -208,9 +208,9 @@
             // Add the character
             $write.html($write.html() + character);
             if ($write.val().length > 0) {
-              $("#submitEmail").removeClass('hide');
+              //$("#submitEmail").removeClass('hide');
             } else {
-              $("#submitEmail").addClass('hide');
+              //$("#submitEmail").addClass('hide');
             }
           });
         });
@@ -995,7 +995,7 @@
   <div class="modal largeModal shadow hide" id="emailModal">
     <div id="container">
       <div id='emailTextbox'>
-        <textarea id="write" rows="1" resizeable="no" readonly></textarea>
+        <textarea id="write" rows="1" resizeable="no"></textarea>
       </div>
       <ul id="keyboard">
           <li class="invisibleKey" style="width: 2.5px"></li>
@@ -1066,7 +1066,7 @@
     <div class="closeModalButton clickable shadow">
       <img src="/make-a-pledge/images/dismiss_icon.png" width="30" height="30" draggable="false" />
     </div>
-     <div id="submitEmail" class="hide clickable shadow">SKICKA!</div>
+     <div id="submitEmail" class="clickable shadow">SKICKA!</div>
   </div>
 
   <div class="modal smallModal shadow hide" id="thanksModal">
