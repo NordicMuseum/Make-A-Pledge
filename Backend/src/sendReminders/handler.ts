@@ -14,6 +14,7 @@ import { readFileSync } from 'fs';
 const mailgun = Mailgun({
   apiKey: process.env.mailgunAPIKey,
   domain: process.env.mailgunDomain,
+  host: 'api.eu.mailgun.net'
 });
 
 export const sendReminders = async (event: IEventPayload, context, callback: ICallback) => {
@@ -50,7 +51,7 @@ export const sendReminders = async (event: IEventPayload, context, callback: ICa
     }, {});
 
     const functionName = context.functionName.split('-').pop();
-    const from = `Nordiska Museet Löftesinsamling <NordiskaMuseet@${process.env.mailgunDomain}>`;
+    const from = `Nordiska museets löftesinsamling <NordiskaMuseet@${process.env.mailgunDomain}>`;
 
     Object.keys(emailsChunkedBySubcategory).forEach(function(subcategory) {
       const chunk = emailsChunkedBySubcategory[subcategory];
