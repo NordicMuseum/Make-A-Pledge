@@ -14,7 +14,7 @@ var categories = {
       },
       {
         id: 'Quality',
-        name: 'Köp färre och i bättre kvalité om du köper nytt.',
+        name: 'Köpa färre och i bättre kvalité om du köper nytt.',
         text: 'Fundera ordentligt varje gång du köper nya kläder. Om du verkligen behöver köpa nya kläder, köp då färre plagg i bättre kvalité som håller länge.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
@@ -72,7 +72,7 @@ var categories = {
     actions: [
       {
         id: 'Secondhand',
-        name: 'Köp eller sälj second hand.',
+        name: 'Köpa eller sälj second hand.',
         text: 'Inred ditt hem klimatsmart! Behöver du möbler, leksaker till barnen, handla second hand. Gå på loppis, kolla på blocket eller gå på auktion. Du får ofta kvalitetsmöbler för lägre pris än nytillverkade av sämre kvalité.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
@@ -90,7 +90,7 @@ var categories = {
       },
       {
         id: 'Durability',
-        name: 'Gör långsiktiga inköp.',
+        name: 'Göra långsiktiga inköp.',
         text: 'Behöver du verkligen köpa nytt, välj då något av högre kvalité som håller längre och som är tillverkat i miljövänliga material. Om du köper en soffa kan du  undersöka om klädseln är avtagbar och tvättbar, eller om ett bord går att slipa ner.',
         localOrgLink: [],
         learnMoreText: '<h2>Exempel ur Nordiska museets samlingar</h2><img src="/make-a-pledge/images/objects/NM.0059952.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Täljstenslampa från Grönland som eldas med sälfett, sent 1800-tal. Lampan höll länge och var jämförelsevis energisnål. NM.0059952</p>',
@@ -108,7 +108,7 @@ var categories = {
         text: 'Spara på elen och uppvärmningen genom att täta springor i väggar och golv.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
-        learnMoreText: '<h2>Exempel ur Nordiska museets samlingar</h2><img src="/make-a-pledge/images/objects/NM.0126345.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Rana (vävt tygstycke) från Vittangi i Lappland, innan 1915. Tygstycken har använts för att täta eller för att trivas med lägre inomhustemperatur NM.0126345</p>',
+        learnMoreText: '<h2>Exempel ur Nordiska museets samlingar</h2><img src="/make-a-pledge/images/objects/NM.0126345.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Rana (vävt tygstycke) från Vittangi i Lappland, innan 1915. Tygstycken har använts för att täta eller för att trivas med lägre inomhustemperatur. NM.0126345</p>',
         learnMoreLink: 'https://www.folksam.se/tester-och-goda-rad/miljo-och-ansvar/bli-klimatsmart/bo-klimatsmart'
       },
       {
@@ -137,7 +137,7 @@ var categories = {
     actions: [
       {
         id: 'Vegetarian',
-        name: 'Ät mer vegetariskt.',
+        name: 'Äta mer vegetariskt.',
         text: 'Om du låter bli att äta nötkött en gång i veckan under ett år undviker du 150 kilo växthusgasutsläpp. Du sparar även pengar &ndash; på ett år sparar du minst 450 kronor per person i hushållet genom att göra pastasås med bönor istället för med köttfärs.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
@@ -155,7 +155,7 @@ var categories = {
       },
       {
         id: 'Locallyproduced',
-        name: 'Köp närproducerat och efter säsong.',
+        name: 'Köpa närproducerat och efter säsong.',
         text: 'Fråga vad som är i säsong just nu. Potatis har liksom morot, broccoli och vitkål mycket liten klimatpåverkan eftersom de kan odlas nära och kan lagras länge. Ris har högre klimatpåverkan då det odlas i vatten och växtdelarnas nedbrytning bildar metangas. Ett alternativ till ris är matvete.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
