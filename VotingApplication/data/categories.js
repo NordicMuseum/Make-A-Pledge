@@ -91,7 +91,7 @@ var categories = {
       {
         id: 'Durability',
         name: 'Göra långsiktiga inköp.',
-        text: 'Behöver du verkligen köpa nytt, välj då något av högre kvalité som håller längre och som är tillverkat i miljövänliga material. Om du köper en soffa kan du  undersöka om klädseln är avtagbar och tvättbar, eller om ett bord går att slipa ner.',
+        text: 'Behöver du verkligen köpa nytt, välj då något av högre kvalité som håller längre och som är tillverkat i miljövänliga material. Om du köper en soffa kan du undersöka om klädseln är avtagbar och tvättbar, eller om ett bord går att slipa ner.',
         localOrgLink: [],
         learnMoreText: '<h2>Exempel ur Nordiska museets samlingar</h2><img src="/make-a-pledge/images/objects/NM.0059952.jpg" height="190" class="learnMoreImage"/><p class="learnMoreText">Täljstenslampa från Grönland som eldas med sälfett, sent 1800-tal. Lampan höll länge och var jämförelsevis energisnål. NM.0059952</p>',
         learnMoreLink: 'https://malin.elledecoration.se/att-inreda-hallbart'
