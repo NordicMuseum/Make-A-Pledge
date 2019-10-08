@@ -72,7 +72,7 @@ var categories = {
     actions: [
       {
         id: 'Secondhand',
-        name: 'Köpa eller sälj second hand.',
+        name: 'Köpa eller sälja second hand.',
         text: 'Inred ditt hem klimatsmart! Behöver du möbler, leksaker till barnen, handla second hand. Gå på loppis, kolla på blocket eller gå på auktion. Du får ofta kvalitetsmöbler för lägre pris än nytillverkade av sämre kvalité.',
         localOrgText: 'ExampleLocalOrg',
         localOrgLink: ['http://www.example.com/'],
