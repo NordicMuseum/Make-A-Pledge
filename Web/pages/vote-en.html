@@ -301,7 +301,7 @@
             }
             $('#confirmationAction').html(actionName);
             $('#confirmationTitle').html(confirmationSynonyms[SYNONYM_INDEX]);
-            $('#emailPrompt').html("Vill du att vi skickar ett  bekräftelsemail med ytterligare information om ditt löfte att göra en insats kopplad till " + categories[SESSION_CATEGORY].name.toLowerCase() + "?");
+            $('#emailPrompt').html("Do you want us to send a follow-up email with additional information about your pledge about " + categories[SESSION_CATEGORY].name.toLowerCase() + "?");
             SYNONYM_INDEX = (SYNONYM_INDEX + 1) % confirmationSynonyms.length;
 
             // Hide checklist and show confirmation
@@ -472,7 +472,7 @@
   <div class="modal largeModal shadow hide" id="confirmationModal">
     <div id="confirmationContainer">
       <div id="confirmationTitle" class="title"></div>
-      <div id="confirmationSubtitle" class="title">Du lovar att <span id="confirmationAction"></span></div>
+      <div id="confirmationSubtitle" class="title">You promise to <span id="confirmationAction"></span></div>
       <div id="confirmationEmailQuestion" class="subtitle">
         Individual actions are important. There are many things you can do to change your impact on climate change.<br>
         <span id="emailPrompt">Do you want a follow-up email with additional information about your pledge?</span>
