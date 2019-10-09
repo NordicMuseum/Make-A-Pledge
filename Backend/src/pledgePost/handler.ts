@@ -23,6 +23,10 @@ export const pledgePost = async (event: IEventPayload, context, callback: ICallb
 
     callback(null, {
       statusCode: HTTPStatusCodes.BadRequest,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: "JSON is not valid.",
     });
     return;
@@ -41,6 +45,10 @@ export const pledgePost = async (event: IEventPayload, context, callback: ICallb
 
     callback(null, {
       statusCode: HTTPStatusCodes.BadRequest,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: "Please send data in the format: " + JSON.stringify(dataFormat),
     });
     return;
@@ -50,6 +58,10 @@ export const pledgePost = async (event: IEventPayload, context, callback: ICallb
     ) {
     callback(null, {
       statusCode: HTTPStatusCodes.BadRequest,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: "Please make sure the computerLocation and/or category is correct.",
     });
     return;
@@ -71,6 +83,10 @@ export const pledgePost = async (event: IEventPayload, context, callback: ICallb
   if (updateError) {
     callback(null, {
       statusCode: HTTPStatusCodes.InternalServerError,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: "Server Error. Check server error logs.",
     });
     return;
@@ -86,6 +102,10 @@ export const pledgePost = async (event: IEventPayload, context, callback: ICallb
 
     callback(null, {
       statusCode: HTTPStatusCodes.OK,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
     });
   } catch (e) {
     console.log(e);

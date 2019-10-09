@@ -14,26 +14,27 @@ import { readFileSync } from 'fs';
 const mailgun = Mailgun({
   apiKey: process.env.mailgunAPIKey,
   domain: process.env.mailgunDomain,
+  host: 'api.eu.mailgun.net'
 });
 
 export const sendReminders = async (event: IEventPayload, context, callback: ICallback) => {
   try {
-    // const sixMonthsPast = moment()
-    //   .tz('Europe/Stockholm')
-    //   .subtract(6, 'months')
-    //   .format('M/D/YYYY');
-
-    const aDayAgo = moment()
+    const sixMonthsPast = moment()
       .tz('Europe/Stockholm')
-      .subtract(1, 'days')
+      .subtract(6, 'months')
       .format('M/D/YYYY');
+
+    //const aDayAgo = moment()
+    //  .tz('Europe/Stockholm')
+    //  .subtract(1, 'days')
+    //  .format('M/D/YYYY');
 
     const scanParams = {
       TableName: process.env.tableName,
-      FilterExpression: 'signed_up_date = :a_day_ago',
-      ExpressionAttributeValues: { ':a_day_ago': aDayAgo }
-      // FilterExpression: 'signed_up_date = :six_months_past',
-      // ExpressionAttributeValues: { ':six_months_past': sixMonthsPast }
+      // FilterExpression: 'signed_up_date = :a_day_ago',
+      // ExpressionAttributeValues: { ':a_day_ago': aDayAgo }
+      FilterExpression: 'signed_up_date = :six_months_past',
+      ExpressionAttributeValues: { ':six_months_past': sixMonthsPast }
     };
 
     const results = await dynamoDBScanPromise(scanParams);
@@ -50,7 +51,7 @@ export const sendReminders = async (event: IEventPayload, context, callback: ICa
     }, {});
 
     const functionName = context.functionName.split('-').pop();
-    const from = `Nordiska Museet Löftesinsamling <NordiskaMuseet@${process.env.mailgunDomain}>`;
+    const from = `Nordiska museets löftesinsamling <NordiskaMuseet@${process.env.mailgunDomain}>`;
 
     Object.keys(emailsChunkedBySubcategory).forEach(function(subcategory) {
       const chunk = emailsChunkedBySubcategory[subcategory];

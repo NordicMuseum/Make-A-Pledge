@@ -1,14 +1,55 @@
 import { PieChart, Pie, Cell } from 'recharts'
 import TransitionGroup from 'react-addons-transition-group'
 import { TweenMax } from 'gsap'
+import AWSMqttClient from 'aws-mqtt'
+import 'aws-sdk/dist/aws-sdk'
 
 import './index.css'
 import secret from './secrets.js'
 import identity from './identity.js'
-import { lang, settings } from './utils.js'
 
-import AWSMqttClient from 'aws-mqtt'
-import 'aws-sdk/dist/aws-sdk'
+// import { lang, settings } from './utils.js'
+
+const lang = {
+  heading: 'Vi lovar att förbättra…',
+  pledges: 'Löften',
+  categories: {
+    Clothing: 'Kläder',
+    Travels: 'Resor',
+    Purchases: 'Prylar',
+    Food: 'Mat',
+    Living: 'Boende'
+  }
+}
+
+const settings = {
+  Food: {
+    value: 1,
+    color: '#cedb29',
+    icon: 'food_icon.png'
+  },
+  Clothing: {
+    alue: 1,
+    color: '#5cb7b3',
+    icon: 'water_icon.png'
+  },
+  Travels: {
+    value: 1,
+    color: '#146170',
+    icon: 'transportation_icon.png'
+  },
+  Purchases: {
+    value: 1,
+    color: '#a65a95',
+    icon: 'habitat_icon.png'
+  },
+  Living: {
+    value: 1,
+    color: '#cb7d31',
+    icon: 'energy_icon.png'
+  }
+}
+
 const AWS = window.AWS
 AWS.config.region = 'us-east-2'
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -60,7 +101,7 @@ class Entry extends React.Component {
           region: AWS.config.region,
           credentials: AWS.config.credentials,
           endpoint: iotProperties.endpoint,
-          clientId: 'nordic-museum-poll-client'
+          clientId: 'nordic-museum-poll-client-' + new Date().getTime()
         })
 
         client.on('connect', () => {

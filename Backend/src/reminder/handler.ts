@@ -98,12 +98,12 @@ export const reminder = async (event: IEventPayload, context, callback: ICallbac
     const functionName = context.functionName.split('-').pop();
     const html = readFileSync(`./src/${functionName}/emails/confirm${body.subcategory}.html`, 'utf8');
 
-    const from = `Nordiska Museet Löftesinsamling <NordiskaMuseet@${process.env.mailgunDomain}>`;
+    const from = `Nordiska museets löftesinsamling <NordiskaMuseet@${process.env.mailgunDomain}>`;
 
     const emailData = {
       from,
       to: body.email,
-      subject: 'Hurra! Här kommer information om ditt löfte.',
+      subject: 'Här kommer information om ditt lämnade löfte.',
       html,
     };
 

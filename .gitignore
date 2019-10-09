@@ -16,3 +16,7 @@ Poll/javascripts/fonts/EksellDisplayWeb-Medium.woff2
 VotingApplication/fonts/EksellDisplayWeb-Medium.eot
 VotingApplication/fonts/EksellDisplayWeb-Medium.woff
 VotingApplication/fonts/EksellDisplayWeb-Medium.woff2
+Web/publish/*
+Web/assets/fonts/EksellDisplayWeb-Medium.eot
+Web/assets/fonts/EksellDisplayWeb-Medium.woff
+Web/assets/fonts/EksellDisplayWeb-Medium.woff2

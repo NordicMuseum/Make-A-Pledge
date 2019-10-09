@@ -10,6 +10,7 @@ export enum HTTPStatusCodes {
 export interface IResponsePayload {
   statusCode: HTTPStatusCodes,
   body?: string,
+  headers?: any,
 }
 
 export interface IEventPayload {
