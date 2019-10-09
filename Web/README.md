@@ -6,6 +6,12 @@
 npm install
 ```
 
+## Development
+
+```sh
+npm run watch
+```
+
 ## Build/Assemble
 
 Each page is defined in the `pages/` directory. Some of the assets are however

@@ -11,6 +11,12 @@ const AVAILABLE_LOCALES = [
 app.use(express.static(path.resolve(__dirname, 'assets')))
 app.use(express.static(path.resolve(__dirname, 'assets/poll')))
 
+app.get('/make-a-pledge/:locale/*', (req, res) => {
+  if (req.params.locale !== 'se' && req.params.locale !== 'en') {
+    res.redirect('/' + req.params.locale + '/' + req.params[0])
+  }
+})
+
 app.get('/', (_, res) => res.status(404).send('Not Found'))
 app.get('//:locale/vote', (req, res) => {
   // Only allow available locales
