@@ -60,7 +60,7 @@ class Entry extends React.Component {
           region: AWS.config.region,
           credentials: AWS.config.credentials,
           endpoint: iotProperties.endpoint,
-          clientId: 'nordic-museum-poll-client'
+          clientId: 'nordic-museum-poll-client-' + new Date().getTime()
         })
 
         client.on('connect', () => {
