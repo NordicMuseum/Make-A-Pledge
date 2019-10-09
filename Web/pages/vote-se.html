@@ -301,7 +301,7 @@
             }
             $('#confirmationAction').html(actionName);
             $('#confirmationTitle').html(confirmationSynonyms[SYNONYM_INDEX]);
-            $('#emailPrompt').html("Vill du att vi skickar ett  bekräftelsemail med ytterligare information om ditt löfte att göra en insats kopplad till " + categories[SESSION_CATEGORY].name.toLowerCase() + "?");
+            $('#emailPrompt').html("Vill du att vi skickar ett  bekräftelsemail med ytterligare information om ditt löfte om " + categories[SESSION_CATEGORY].name.toLowerCase() + "?");
             SYNONYM_INDEX = (SYNONYM_INDEX + 1) % confirmationSynonyms.length;
 
             // Hide checklist and show confirmation
