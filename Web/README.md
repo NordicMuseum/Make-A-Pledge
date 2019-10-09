@@ -9,8 +9,16 @@ npm install
 ## Development
 
 ```sh
+npm run build # needed first time to build the applications
 npm run watch
 ```
+
+Pages are available here
+- [http://localhost:3000//se/poll](http://localhost:3000//se/poll)
+- [http://localhost:3000//en/poll](http://localhost:3000//en/poll)
+- [http://localhost:3000//se/vote](http://localhost:3000//se/vote)
+- [http://localhost:3000//en/vote](http://localhost:3000//en/vote)
+
 
 ## Build/Assemble
 
