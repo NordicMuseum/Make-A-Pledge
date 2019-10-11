@@ -374,6 +374,10 @@
           'top': '1000px'
         });
 
+        var idleInterval = setInterval(function() {
+            timerIncrement(5000);
+          }, 5000);
+
         // debugging
         window.addEventListener('keydown', function(e) {
           // touch events - disable zoom
@@ -386,9 +390,7 @@
           // Listener to tell when someone has walked away from the app
           // Check every 5 seconds
           // Increment the idle time counter every minute.
-          var idleInterval = setInterval(function() {
-            timerIncrement(5000);
-          }, 5000);
+          
         });
 
     });
