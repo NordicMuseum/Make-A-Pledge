@@ -356,7 +356,7 @@
 
       function timerIncrement(ms) {
         idleTime = idleTime + ms;
-        if (idleTime > 80000) { // 80 seconds
+        if (idleTime > 120000) { // 120 seconds
           idleTime = 0;
           endSession();
         }
