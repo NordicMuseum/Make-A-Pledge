@@ -15,9 +15,13 @@
 }
 
 body {
-  overflow: hidden !important;
+  overflow: hidden;
   margin: 0px;
   -webkit-user-select: none !important;
+  background-image: url('/make-a-pledge/images/Jamal.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 body {
@@ -51,7 +55,7 @@ body {
 }
 
 .subtitle {
-  font-size: 40px !important;
+  font-size: 40px;
   color: #e9efe7 !important; /* white */
   font-family: 'EksellDisplayWebMedium' !important;
 }
@@ -129,6 +133,11 @@ body {
   cursor: pointer;
 }
 
+.closeModalButton img {
+  width: 30px;
+  height: 30px;
+}
+
 #map,
 #clickableOverlay {
   position: absolute;
@@ -137,9 +146,6 @@ body {
   bottom: 0px;
   right: 0px;
   max-width:100%;
-  background-image: url('/make-a-pledge/images/Jamal.jpg');
-  background-size: cover;
-  background-position: center;
 }
 
 
@@ -289,6 +295,7 @@ body {
 .learnMoreImage {
   float: left;
   padding-right: 20px;
+  height: 190px;
 }
 
 .learnMoreText {
@@ -494,3 +501,208 @@ body {
 }
 
 
+
+@media (max-width: 500px) {
+  div#caption {
+    position: relative;
+    right: auto;
+    top: auto;
+    font-size: 20px;
+    margin: 10px auto;
+    padding: 0 10px;
+  }
+
+  body {
+    overflow: auto;
+  }
+
+  #ClothingLabel, #PurchasesLabel, #FoodLabel, #TravelsLabel, #LivingLabel {
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
+  }
+
+  .categoryLabel {
+    position: relative;
+    margin: 0 5px 5px 5px;
+  }
+
+  .subtitle {
+    font-size: 32px;
+  }
+
+  .closeModalButton {
+    width: 40px;
+    height: 35px;
+    border-radius: 20px;
+    padding-top: 5px;
+    top: -5px;
+    right: -5px;
+  }
+
+  .closeModalButton img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .modal {
+    position: relative;
+    width: 93vw;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    padding: 0;
+    margin: 10px auto 0;
+  }
+
+  #checklistHeader, #checklistBody {
+    padding: 10px;
+  }
+
+  #checklistHeader {
+    margin-bottom: 0;
+  }
+
+  #checklistBody {
+    flex-direction: column;
+    padding-bottom: 0px;
+  }
+
+  #checklistLogo {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  #checklistSeparator {
+    display: none;
+  }
+
+  #checklistPrompt {
+    padding-bottom: 5px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .instruction {
+    font-size: 20px;
+  }
+
+  .actionItemCheckbox {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+  }
+
+  #checklistlearnMoreText {
+    padding-top: 0;
+  }
+
+  .actionItemName, div#checklistlearnMoreText h2 {
+    font-size: 24px;
+    padding-bottom: 8px;
+  }
+
+  .learnMoreImage {
+    height: 140px;
+  }
+
+  #submitActionButton {
+    position: fixed;
+    bottom: 10px;
+    margin: 0;
+    right: auto;
+    width: 86vw;
+    left: 7vw;
+    height: 40px;
+    padding: 0;
+    border-radius: 7px;
+    line-height: 45px;
+    font-size: 20px;
+  }
+
+  #confirmationEmailQuestion {
+    padding: 0;
+  }
+
+  #confirmationContainer {
+    padding: 5px;
+  }
+
+  #confirmationEmailQuestionNoButton, #confirmationEmailQuestionYesButton {
+    display: block;
+    height: 40px;
+    margin: 5px 0;
+    padding: 5px;
+    line-height: 45px;
+    border-radius: 7px;
+  }
+
+  #confirmationEmailPrivacyStatement {
+    padding-bottom: 10px;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 5px;
+  }
+
+  #confirmationEmailQuestion.subtitle {
+    font-size: 24px;
+  }
+
+  #write {
+    width: 95%;
+    height: 40px;
+    font-size: 30px;
+    line-height: 60px;
+  }
+
+  #container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px 0 30px;
+  }
+
+  #container .title {
+    padding: 10px 0;
+  }
+
+  #emailTextbox {
+    margin: 0;
+    height: 40px;
+  }
+
+  #submitEmail {
+    position: relative;
+    border-radius: 7px;
+    height: 40px;
+    line-height: 48px;
+    bottom: 10px;
+    right: auto;
+    margin: 10px;
+  }
+
+  #submitEmail.clickable {
+    font-size: 24px;
+  }
+
+  .body {
+    font-size: 18px;
+  }
+
+  .desktop, #keyboard {
+    display: none;
+  }
+}
+
+@media (min-width: 501px) {
+  .mobile {
+    display: none;
+  }
+}
