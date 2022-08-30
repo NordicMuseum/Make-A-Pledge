@@ -19,7 +19,7 @@
     "@types/aws-sdk": "^2.7.0",
     "@types/node": "^8.10.39",
     "mailgun-js": "^0.22.0",
-    "moment-timezone": "^0.5.23",
+    "moment-timezone": "^0.5.35",
     "promise-cb": "^0.1.4",
     "uuid": "^3.3.2"
   }
